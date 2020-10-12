@@ -1,0 +1,18 @@
+Package: sep
+Title: Swiss Environmental Panel data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Colin",
+           family = "Walder",
+           role = c("aut", "cre"),
+           email = "colin.walder@ir.gess.ethz.ch")
+Description: Easier data wrangling with Swiss Environmental Panel data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    magrittr,
+    dplyr,
+    ggplot2

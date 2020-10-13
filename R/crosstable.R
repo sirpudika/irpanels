@@ -3,12 +3,11 @@
 #' @param vars vector of variables
 #' @param df dataframe
 #'
-#' @return
+#' @return a crosstable
 #' @export
 
 #' @examples
 #' crosstable(vars = c("gear", "carb"), df = mtcars)
-
 crosstable<- function(vars, df){
   dframe <- df %>%
     dplyr::select(!!vars) %>%

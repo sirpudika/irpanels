@@ -12,7 +12,7 @@ crosstable(vars, df)
 \item{df}{dataframe}
 }
 \value{
-
+a crosstable
 }
 \description{
 Create simple crosstables of n variables

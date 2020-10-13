@@ -2,5 +2,7 @@
 
 export("%>%")
 export(crosstable)
+export(septheme)
 export(simple_barplot)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)

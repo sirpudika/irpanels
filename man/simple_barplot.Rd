@@ -16,7 +16,7 @@ simple_barplot(df, var, title, ...)
 \item{...}{any other option for geom_bar}
 }
 \value{
-
+a plot
 }
 \description{
 Create simple barplots

@@ -16,4 +16,5 @@ Imports:
     magrittr,
     dplyr,
     ggplot2,
-    rlang
+    rlang,
+    scales

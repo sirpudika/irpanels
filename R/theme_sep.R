@@ -1,4 +1,6 @@
-#' The \code{SEP} theme
+#' The SEP theme
+#'
+#' This function, strongly inspired by Bob Rudis' \href{https://github.com/hrbrmstr/hrbrthemes}{hrbrthemes}, aims to standardize the appearance of the plots in SEP Reports. The function is written to be highly adaptable. Thus, it is more of a basic idea than an actual template for the plots. Note, this function currently only works if the "Roboto" family is installed on your system (publicly available here: link)!
 #'
 #' @param base_family base font family
 #' @param base_size base font size
@@ -26,17 +28,17 @@
 #' \dontrun{
 #'
 #' ## set as theme
-#' theme_set(septheme())
+#' theme_set(theme_sep())
 #'
 #' ## or use locally
 #'
 #' library(ggplot2)
 #' ggplot(data = mtcars, aes(x = gear, y = am)) +
 #' geom_point() +
-#' septheme()
+#' theme_sep()
 #' }
 
-septheme <- function (base_family = "IBM Plex Sans", base_size = 11.5, plot_title_family = base_family,
+theme_sep <- function (base_family = "Roboto", base_size = 11.5, plot_title_family = base_family,
                       plot_title_size = 18, plot_title_face = "bold", plot_title_margin = 10,
                       subtitle_family = base_family, subtitle_size = 12, subtitle_face = "plain",
                       subtitle_margin = 15, strip_text_family = base_family, strip_text_size = 12,
@@ -52,4 +54,3 @@ septheme <- function (base_family = "IBM Plex Sans", base_size = 11.5, plot_titl
 
   return(template)
 }
-

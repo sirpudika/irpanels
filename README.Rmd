@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 # sep
 
-The goal of sep is to help collaborators and interested users to create graphics as used in the Swiss Environmental Panel Reports.
+The goal of `sep` is to help collaborators and interested users to create graphics as used in the Swiss Environmental Panel Reports.
 
 ## Installation
 
@@ -26,16 +26,24 @@ You can install a development version of `sep` from [GitHub](https://github.com/
 devtools::install_github("bonschorno/sep")
 ```
 
+```{r}
+library(sep)
+library(tidyverse)
+```
+
+
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+First, replace the default theme of ggplot2 with `theme_sep.`
+
+```{r}
+#theme_set(theme_sep())
+```
+
 
 ```{r example, fig.retina=3}
-library(sep)
-
 #create a simple barplot with manually adjusted with of bars
-
-simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3)
+simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3) 
 ```
 
 ```{r}

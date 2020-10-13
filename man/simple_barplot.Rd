@@ -2,9 +2,9 @@
 % Please edit documentation in R/simple_barplot.R
 \name{simple_barplot}
 \alias{simple_barplot}
-\title{Create simple barplots}
+\title{Simple barplot}
 \usage{
-simple_barplot(df, var, title, ...)
+simple_barplot(df, var, title, ..., barcolor = "#1F407A")
 }
 \arguments{
 \item{df}{dataframe}
@@ -14,12 +14,14 @@ simple_barplot(df, var, title, ...)
 \item{title}{plot title}
 
 \item{...}{any other option for geom_bar}
+
+\item{barcolor}{color of the bar}
 }
 \value{
 a plot
 }
 \description{
-Create simple barplots
+Creates a simple barplot for any variable.
 }
 \examples{
 simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3)

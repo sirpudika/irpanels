@@ -15,7 +15,7 @@ crosstable(vars, df)
 a crosstable
 }
 \description{
-Create simple crosstables of n variables
+Unfortunately, for the time being this function only works with two numeric variables with values above 0. Updates will follow.
 }
 \examples{
 crosstable(vars = c("gear", "carb"), df = mtcars)

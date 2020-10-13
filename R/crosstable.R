@@ -1,5 +1,7 @@
 #' Create simple crosstables of n variables
 #'
+#' Unfortunately, for the time being this function only works with two numeric variables with values above 0. Updates will follow.
+#'
 #' @param vars vector of variables
 #' @param df dataframe
 #'

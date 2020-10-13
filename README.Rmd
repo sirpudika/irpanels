@@ -32,23 +32,44 @@ library(tidyverse)
 ```
 
 
-## Example
+## A quick overview
 
-First, replace the default theme of ggplot2 with `theme_sep.`
+Probably the most useful function is `sep_palette` for the time being. It is is a non-exhaustive selection of official color palettes as listed on the ETH Zurich website. This makes adding the official ETH colors to the plots very easy with the various `scale_*_manual` functions. 
 
 ```{r}
-#theme_set(theme_sep())
-```
-
-
-```{r example, fig.retina=3}
-#create a simple barplot with manually adjusted with of bars
-simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3) 
+sep_palette("Darkblues")
 ```
 
 ```{r}
-# creating a simple crosstable
+sep_palette("Pinks", n = 4)
+```
 
+```{r, fig.retina=4}
+ggplot(mtcars, aes(x = disp, y = mpg, color = as.factor(carb))) +
+  geom_point() +
+  scale_color_manual(values = sep_palette("Standard"))
+```
+
+To make the plots not only more visually appealing, but also to standardize them across the various reports, `theme_sep` was designed. It can either be applied locally or set as default at the beginning of the script. 
+
+```{r, fig.retina=4}
+ggplot(mtcars, aes(x = disp, y = mpg, color = as.factor(carb))) +
+  geom_point() +
+  scale_color_manual(values = sep_palette("Standard")) +
+  theme_sep()
+
+#set as default theme
+theme_set(theme_sep())
+```
+
+Two other functions are currently still very basic, but will be improved soon. One is `crosstable`, which creates simple crosstables of n (numeric) variables and `simple_barplot` to make creating bar plots very easy.
+
+```{r}
 crosstable(vars = c("gear", "am"), df = mtcars)
+```
+
+
+```{r example, fig.retina=4}
+simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3) 
 ```
 

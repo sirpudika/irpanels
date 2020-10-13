@@ -29,27 +29,74 @@ library(tidyverse)
 #> x dplyr::lag()    masks stats::lag()
 ```
 
-## Example
+## A quick overview
 
-First, replace the default theme of ggplot2 with `theme_sep.`
+Probably the most useful function is `sep_palette` for the time being.
+It is is a non-exhaustive selection of official color palettes as listed
+on the ETH Zurich website. This makes adding the official ETH colors to
+the plots very easy with the various `scale_*_manual` functions.
 
 ``` r
-#theme_set(theme_sep())
+sep_palette("Darkblues")
+#> [1] "#385C9B" "#748DB9" "#A0B1D0" "#CDD6E6" "#E6EbF3"
+#> attr(,"class")
+#> [1] "palette"
+#> attr(,"name")
+#> [1] "Darkblues"
 ```
 
 ``` r
-#create a simple barplot with manually adjusted with of bars
-simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3) 
+sep_palette("Pinks", n = 4)
+#> [1] "#A73788" "#BD69A5" "#D39BC3" "#E9CDE1"
+#> attr(,"class")
+#> [1] "palette"
+#> attr(,"name")
+#> [1] "Pinks"
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+``` r
+ggplot(mtcars, aes(x = disp, y = mpg, color = as.factor(carb))) +
+  geom_point() +
+  scale_color_manual(values = sep_palette("Standard"))
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+To make the plots not only more visually appealing, but also to
+standardize them across the various reports, `theme_sep` was designed.
+It can either be applied locally or set as default at the beginning of
+the script.
 
 ``` r
-# creating a simple crosstable
+ggplot(mtcars, aes(x = disp, y = mpg, color = as.factor(carb))) +
+  geom_point() +
+  scale_color_manual(values = sep_palette("Standard")) +
+  theme_sep()
+```
 
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+``` r
+
+#set as default theme
+theme_set(theme_sep())
+```
+
+Two other functions are currently still very basic, but will be improved
+soon. One is `crosstable`, which creates simple crosstables of n
+(numeric) variables and `simple_barplot` to make creating bar plots very
+easy.
+
+``` r
 crosstable(vars = c("gear", "am"), df = mtcars)
 #>     am
 #> gear    1
 #>    4 0.62
 #>    5 0.38
 ```
+
+``` r
+simple_barplot(df = mtcars, var = gear, title = "Gears", width = 0.3) 
+```
+
+<img src="man/figures/README-example-1.png" width="100%" />

@@ -7,7 +7,7 @@
 eda_crosstable(data = currentwave, items, rm.dk = TRUE, itemnames = NULL)
 }
 \arguments{
-\item{data}{A \code{data.frame} object}
+\item{data}{a \code{data.frame} object}
 
 \item{items}{survey items (in form of a vector)}
 

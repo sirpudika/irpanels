@@ -1,6 +1,6 @@
 #' Calculates a frequency table for two survey items
 #'
-#' @param data A \code{data.frame} object
+#' @param data a \code{data.frame} object
 #' @param items survey items (in form of a vector)
 #' @param rm.dk a logical value indicating whether "Don't know" values (-8) should be stripped before the computation proceeds
 #' @param itemnames optional argument for specifying the survey items' names

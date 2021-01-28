@@ -66,7 +66,7 @@ theme_sep(
 the sep theme
 }
 \description{
-This function, strongly inspired by Bob Rudis' \href{https://github.com/hrbrmstr/hrbrthemes}{hrbrthemes}, aims to standardize the appearance of the plots in SEP Reports. The function is written to be highly adaptable. Thus, it is more of a basic idea than an actual template for the plots. Note, this function currently only works if the "Roboto" family is installed on your system (publicly available here: link)!
+This function, strongly inspired by Bob Rudis' \href{https://github.com/hrbrmstr/hrbrthemes}{hrbrthemes}, aims to standardize the appearance of the plots in SEP Reports. The function is written to be highly adaptable. Thus, it is more of a basic idea than an actual template for the plots. Note, this function currently only works if the "Roboto" family is installed on your system (publicly available \href{here}{https://fonts.google.com/specimen/Roboto})!
 }
 \examples{
 \dontrun{

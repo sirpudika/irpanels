@@ -1,0 +1,29 @@
+---
+title: "Walking you through"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Walking you through}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+For the time being, the sep-package remains a private project, which is why it can only be installed via the following Github repository. 
+
+```{r}
+# install.packages("devtools") 
+#devtools::install_github("bonschorno/sep")
+```
+
+
+```{r setup}
+library(sep)
+```

@@ -18,3 +18,7 @@ Imports:
     ggplot2,
     rlang,
     scales
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

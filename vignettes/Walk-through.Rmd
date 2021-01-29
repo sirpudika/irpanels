@@ -24,6 +24,23 @@ For the time being, the sep-package remains a private project, which is why it c
 ```
 
 
-```{r setup}
+```{r setup, include=FALSE}
 library(sep)
 ```
+
+The package is divided into different helper functions. Functions that start with `eda_*` help with exploratory data analysis. As an (optional) first step, the survey is loaded into the global environment. This is not good coding practice, but it has a significant advantage. This way, you do not always have to specify the survey in the data argument later, but only the corresponding survey item, which simplifies the workflow considerably. 
+
+It must be added that the data set used is not publicly accessible for data protection reasons. However, it can be requested here.
+
+```{r}
+load("upanel_w5.RData")
+eda_loadtoenv(w5)
+```
+
+We almost always need to know the relative frequencies of the responses to a survey item. `eda_freqtable` helps to get these numbers quickly. By default, the logical operator is `rm.dk = FALSE`, i.e. the relative proportion of "Don't know" responses is included.
+
+```{r}
+eda_freqtable(item = w5_q27)
+eda_freqtable(item = w5_q27, rm.dk = T)
+```
+

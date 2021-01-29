@@ -12,7 +12,7 @@
 #' eda_freqtable(data = w5, item = w5_q11, rm.dk = FALSE)
 #' }
 #' @import dplyr
-eda_freqtable <- function(data = currentwave, item, rm.dk = TRUE){
+eda_freqtable <- function(data = currentwave, item, rm.dk = FALSE){
   if (!is.data.frame(data)) stop("Make sure the input is a data.frame")
   if (isTRUE(rm.dk))  {
     df <- filter(data, {{item}} >= 0)

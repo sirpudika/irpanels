@@ -10,6 +10,7 @@
 #' @examples
 #' eda_loadtoenv(mtcars)
 eda_loadtoenv <- function(data){
+
   if (!is.data.frame(data)) stop("data must be a data.frame object")
   currentwave <<- data
 }

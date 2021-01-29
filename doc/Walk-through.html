@@ -137,7 +137,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For the time being, the sep-package remains a private project, which is why it can only be installed via the following Github repository.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;) </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;bonschorno/sep&quot;)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sep)</span></code></pre></div>
+<p>The package is divided into different helper functions. Functions that start with <code>eda_*</code> help with exploratory data analysis. As an (optional) first step, the survey is loaded into the global environment. This is not good coding practice, but it has a significant advantage. This way, you do not always have to specify the survey in the data argument later, but only the corresponding survey item, which simplifies the workflow considerably.</p>
+<p>It must be added that the data set used is not publicly accessible for data protection reasons. However, it can be requested here.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;upanel_w5.RData&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eda_loadtoenv</span>(w5)</span></code></pre></div>
+<p>We almost always need to know the relative frequencies of the responses to a survey item. <code>eda_freqtable</code> helps to get these numbers quickly. By default, the logical operator is <code>rm.dk = FALSE</code>, i.e. the relative proportion of “Don’t know” responses is included.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eda_freqtable</span>(<span class="at">item =</span> w5_q27)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Relative frequencies:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   -8    1    2    3    4    5    6    7 </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.06 0.01 0.03 0.11 0.44 0.19 0.12 0.05</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">eda_freqtable</span>(<span class="at">item =</span> w5_q27, <span class="at">rm.dk =</span> T)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Relative frequencies:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    1    2    3    4    5    6    7 </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.01 0.03 0.12 0.47 0.20 0.13 0.05</span></span></code></pre></div>
 
 
 

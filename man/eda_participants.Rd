@@ -4,7 +4,7 @@
 \alias{eda_participants}
 \title{Helper function to quickly calculated the number of participants for the corresponding survey item}
 \usage{
-eda_participants(data = currentwave, item, rm.dk = TRUE)
+eda_participants(data = currentwave, item, rm.dk = FALSE)
 }
 \arguments{
 \item{data}{a data.frame object}

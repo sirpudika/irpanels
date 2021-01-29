@@ -13,7 +13,7 @@
 #' eda_crosstable(data = infert, items = c("education", "parity"), rm.dk = FALSE)
 #' }
 #' @import dplyr
-eda_crosstable<- function(data = currentwave, items, rm.dk = TRUE, itemnames = NULL){
+eda_crosstable<- function(data = currentwave, items, rm.dk = FALSE, itemnames = NULL){
   df <- select(data, !!items)
   if (isTRUE(rm.dk))  {
     df <- df %>%

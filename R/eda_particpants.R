@@ -13,7 +13,7 @@
 #' }
 #' @import dplyr
 
-eda_participants <- function(data = currentwave, item, rm.dk = TRUE){
+eda_participants <- function(data = currentwave, item, rm.dk = FALSE){
 
   if (isTRUE(rm.dk)) {
     data %>%

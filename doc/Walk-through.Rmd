@@ -1,8 +1,8 @@
 ---
-title: "Walking you through"
+title: "Walking you through sep"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Walking you through}
+  %\VignetteIndexEntry{Walking you through sep}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,25 +12,30 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   message = FALSE,
-  warning = FALSE
+  warning = FALSE,
+  fig.retina = 4,
+  fig.height = 6, 
+  fig.width = 8
 )
 ```
 
-For the time being, the sep-package remains a private project, which is why it can only be installed via the following Github repository. 
+For the time being, the `sep` remains a private project, which is why it can only be installed via the following Github repository. 
 
-```{r}
-# install.packages("devtools") 
-#devtools::install_github("bonschorno/sep")
+```{r, eval=FALSE}
+devtools::install_github("bonschorno/sep")
 ```
 
 
-```{r setup, include=FALSE}
+
+```{r setup}
 library(sep)
+library(dplyr)
+library(ggplot2)
 ```
 
-The package is divided into different helper functions. Functions that start with `eda_*` help with exploratory data analysis. As an (optional) first step, the survey is loaded into the global environment. This is not good coding practice, but it has a significant advantage. This way, you do not always have to specify the survey in the data argument later, but only the corresponding survey item, which simplifies the workflow considerably. 
+As an (optional) first step, the survey is loaded into the global environment. This is not good coding practice, but it has a significant advantage. This way, you do not always have to specify the survey in the data argument later, but only the corresponding survey item, which simplifies the workflow considerably. 
 
-It must be added that the data set used is not publicly accessible for data protection reasons. However, it can be requested here.
+It must be added that the data set used is not publicly accessible for data protection reasons. However, it can be requested [here](https://istp.ethz.ch/research/sep.html).
 
 ```{r}
 load("upanel_w5.RData")
@@ -43,4 +48,55 @@ We almost always need to know the relative frequencies of the responses to a sur
 eda_freqtable(item = w5_q27)
 eda_freqtable(item = w5_q27, rm.dk = T)
 ```
+
+To calculate the relative frequencies based on two variables, you can use `eda_crosstable`. The two variables must be specified as characters in a vector. Here, too, "Don't knows" can be included/excluded via a logical operator.
+
+```{r}
+eda_crosstable(items = c("w5_q2", "w5_q11"))
+```
+
+The last of the preliminary helper functions for exploratory data analysis is `eda_participants`. This function can be used to quickly determine how many participants have seen the corresponding survey item.
+
+```{r}
+eda_participants(item = w5_q11)
+eda_participants(item = w5_q27)
+```
+
+## Visualizations
+
+Four plot functions are currently available: `plot_bar_v`, `plot_bar_h`, `plot_groupbar_v`, `plot_groupbar_h.` As the respective names imply, the first two functions are used to visualise one variable, while the last two allow visualisation with a grouping variable.
+
+In their simplest forms, `plot_bar_v` and `plot_bar_h` plot the relative frequency of the item in a vertical and horizontal plot, respectively. The values of the items are not yet labelled and the proportion "Don't know" responses must also be specified.
+
+```{r}
+plot_bar_v(item = w5_q11)
+plot_bar_h(item = w5_q11)
+```
+ 
+For the share of "Don't know" responses there is a corresponding argument in the function (`dk_share`). For the labels, you can make use of the underlying `ggplot2` structure of the functions by simply adding further layers. With further optional arguments, the colour of the bars or the position of the relative frequencies can be changed, among other things.
+
+```{r}
+plot_bar_h(item = w5_q11, dk_share = 12) +
+    scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
+```
+
+The functions for the grouped visualisations are identical with the exception that a grouping variable (argument `grouper`) must be specified.
+
+```{r}
+eda_freqtable(item = w5_q11)
+plot_groupbar_h(item = w5_q11, grouper = w5_q2, dk_share = 12, labels = c("Male", "Female")) +
+  scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
+```
+
+Two points need to be added here, which are currently insufficiently clear from the documentation of the functions. First, it is possible to use further arguments of `scale_x_discrete` within the functions. This means that the labels of the legend can be changed directly via `labels.` Furthermore, there is currently no possibility to specify the colours of the bars for the grouped visualisations. For the moment, you have to adjust this as follows.
+
+```{r}
+options(ggplot2.discrete.fill= c("#59C3C3", "#52489C"))
+```
+
+```{r}
+plot_groupbar_h(item = w5_q11, grouper = w5_q2, dk_share = 12, labels = c("Male", "Female")) +
+  scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
+```
+
 

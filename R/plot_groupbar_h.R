@@ -13,7 +13,7 @@
 #'
 #' @import dplyr
 #' @import ggplot2
-#' @importFrom forcats fct_rev
+#' @import forcats
 
 #'
 plot_groupbar_h <- function(data = currentwave, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){

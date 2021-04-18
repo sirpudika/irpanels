@@ -13,7 +13,7 @@
 #'
 #' @import ggplot2
 #' @importFrom rlang .data
-#' @importFrom forcats fct_rev
+#' @import forcats
 #'
 plot_bar_h <- function(data = currentwave, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = 1.2, textsize = 4, textcolor = "white"){
   data %>%

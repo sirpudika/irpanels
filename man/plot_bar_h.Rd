@@ -28,8 +28,6 @@ plot_bar_h(
 \item{textsize}{optional argument to adjust the text's size}
 
 \item{textcolor}{optional argument to adjust the text's colour (default to white)}
-
-\item{dk_share}{share of "Don't knows". Check \code{eda_freqtable} for share.}
 }
 \value{
 a horizontal barplot

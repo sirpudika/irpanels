@@ -74,7 +74,7 @@ plot_bar_h(item = w5_q11)
 For the share of "Don't know" responses there is a corresponding argument in the function (`dk_share`). For the labels, you can make use of the underlying `ggplot2` structure of the functions by simply adding further layers. With further optional arguments, the colour of the bars or the position of the relative frequencies can be changed, among other things.
 
 ```{r}
-plot_bar_h(item = w5_q11, dk_share = 12) +
+plot_bar_h(item = w5_q11) +
     scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 
@@ -82,7 +82,7 @@ The functions for the grouped visualisations are identical with the exception th
 
 ```{r}
 eda_freqtable(item = w5_q11)
-plot_groupbar_h(item = w5_q11, grouper = w5_q2, dk_share = 12, labels = c("Male", "Female")) +
+plot_groupbar_h(item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 
@@ -93,7 +93,7 @@ options(ggplot2.discrete.fill= c("#59C3C3", "#52489C"))
 ```
 
 ```{r}
-plot_groupbar_h(item = w5_q11, grouper = w5_q2, dk_share = 12, labels = c("Male", "Female")) +
+plot_groupbar_h(item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 

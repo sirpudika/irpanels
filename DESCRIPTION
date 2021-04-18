@@ -17,7 +17,8 @@ Imports:
     dplyr,
     ggplot2,
     rlang,
-    scales
+    scales,
+    forcats
 Suggests: 
     knitr,
     rmarkdown

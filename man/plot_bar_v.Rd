@@ -7,7 +7,6 @@
 plot_bar_v(
   data = currentwave,
   item,
-  dk_share = "?",
   barcolor = "#1F407A",
   barwidth = 0.8,
   textvjust = 1.7,
@@ -19,8 +18,6 @@ plot_bar_v(
 \item{data}{a \code{data.frame} object}
 
 \item{item}{a survey item}
-
-\item{dk_share}{share of "Don't knows". Check \code{eda_freqtable} for share.}
 
 \item{barcolor}{optional argument to set the color of the bar}
 

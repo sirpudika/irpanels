@@ -7,7 +7,6 @@
 plot_bar_h(
   data = currentwave,
   item,
-  dk_share = "?",
   barcolor = "#1F407A",
   barwidth = 0.8,
   texthjust = 1.2,
@@ -20,8 +19,6 @@ plot_bar_h(
 
 \item{item}{a survey item}
 
-\item{dk_share}{share of "Don't knows". Check \code{eda_freqtable} for share.}
-
 \item{barcolor}{optional argument to set the color of the bar}
 
 \item{barwidth}{optional argument to define the width of the bar}
@@ -31,6 +28,8 @@ plot_bar_h(
 \item{textsize}{optional argument to adjust the text's size}
 
 \item{textcolor}{optional argument to adjust the text's colour (default to white)}
+
+\item{dk_share}{share of "Don't knows". Check \code{eda_freqtable} for share.}
 }
 \value{
 a horizontal barplot

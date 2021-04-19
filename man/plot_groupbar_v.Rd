@@ -5,7 +5,7 @@
 \title{Grouped vertical barplot}
 \usage{
 plot_groupbar_v(
-  data = currentwave,
+  data,
   item,
   by,
   barpadding = 0.1,

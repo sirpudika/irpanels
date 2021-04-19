@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-For the time being, the `sep` remains a private project, which is why it can only be installed via the following Github repository. 
+For the time being, `sep` remains a private project, which is why it can only be installed via the following Github repository. 
 
 ```{r, eval=FALSE}
 devtools::install_github("bonschorno/sep")
@@ -31,33 +31,30 @@ library(dplyr)
 library(ggplot2)
 ```
 
-As an (optional) first step, the survey is loaded into the global environment. This is not good coding practice, but it has a significant advantage. This way, you do not always have to specify the survey in the data argument later, but only the corresponding survey item, which simplifies the workflow considerably. 
-
-It must be added that the data set used is not publicly accessible for data protection reasons. However, it can be requested [here](https://istp.ethz.ch/research/sep.html).
+FYI: The dataset used is not publicly accessible for data protection reasons. However, it can be requested [here](https://istp.ethz.ch/research/sep.html).
 
 ```{r}
 load("upanel_w5.RData")
-eda_loadtoenv(w5)
 ```
 
 We almost always need to know the relative frequencies of the responses to a survey item. `eda_freqtable` helps to get these numbers quickly. By default, the logical operator is `rm.dk = FALSE`, i.e. the relative proportion of "Don't know" responses is included.
 
 ```{r}
-eda_freqtable(item = w5_q27)
-eda_freqtable(item = w5_q27, rm.dk = T)
+eda_freqtable(w5, item = w5_q27)
+eda_freqtable(w5, item = w5_q27, rm.dk = T)
 ```
 
 To calculate the relative frequencies based on two variables, you can use `eda_crosstable`. The two variables must be specified as characters in a vector. Here, too, "Don't knows" can be included/excluded via a logical operator.
 
 ```{r}
-eda_crosstable(items = c("w5_q2", "w5_q11"))
+eda_crosstable(w5, items = c("w5_q2", "w5_q11"))
 ```
 
-The last of the preliminary helper functions for exploratory data analysis is `eda_participants`. This function can be used to quickly determine how many participants have seen the corresponding survey item.
+The last of the preliminary helper functions for exploratory data analysis is `n_par`. This function can be used to quickly determine how many participants have seen the corresponding survey item.
 
 ```{r}
-eda_participants(item = w5_q11)
-eda_participants(item = w5_q27)
+n_par(w5, item = w5_q11)
+n_par(w5, item = w5_q27)
 ```
 
 ## Visualizations
@@ -67,22 +64,22 @@ Four plot functions are currently available: `plot_bar_v`, `plot_bar_h`, `plot_g
 In their simplest forms, `plot_bar_v` and `plot_bar_h` plot the relative frequency of the item in a vertical and horizontal plot, respectively. The values of the items are not yet labelled and the proportion "Don't know" responses must also be specified.
 
 ```{r}
-plot_bar_v(item = w5_q11)
-plot_bar_h(item = w5_q11)
+plot_bar_v(w5, item = w5_q11)
+plot_bar_h(w5, item = w5_q11)
 ```
  
 For the share of "Don't know" responses there is a corresponding argument in the function (`dk_share`). For the labels, you can make use of the underlying `ggplot2` structure of the functions by simply adding further layers. With further optional arguments, the colour of the bars or the position of the relative frequencies can be changed, among other things.
 
 ```{r}
-plot_bar_h(item = w5_q11) +
+plot_bar_h(w5, item = w5_q11) +
     scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 
 The functions for the grouped visualisations are identical with the exception that a grouping variable (argument `grouper`) must be specified.
 
 ```{r}
-eda_freqtable(item = w5_q11)
-plot_groupbar_h(item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
+eda_freqtable(w5, item = w5_q11)
+plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 
@@ -93,7 +90,7 @@ options(ggplot2.discrete.fill= c("#59C3C3", "#52489C"))
 ```
 
 ```{r}
-plot_groupbar_h(item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
+plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 

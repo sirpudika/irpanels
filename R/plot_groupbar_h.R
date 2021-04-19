@@ -16,7 +16,7 @@
 #' @import forcats
 
 #'
-plot_groupbar_h <- function(data = currentwave, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
+plot_groupbar_h <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
   data %>%
     filter({{item}} > -8,
            {{by}} > -8) %>%

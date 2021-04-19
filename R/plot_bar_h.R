@@ -15,7 +15,7 @@
 #' @importFrom rlang .data
 #' @import forcats
 #'
-plot_bar_h <- function(data = currentwave, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = 1.2, textsize = 4, textcolor = "white"){
+plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = -0.2, textsize = 4, textcolor = "white"){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%
@@ -24,11 +24,11 @@ plot_bar_h <- function(data = currentwave, item, barcolor = "#1F407A", barwidth 
     mutate(freq = n/sum(n)) %>%
     ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq)) +
     geom_col(fill = barcolor, width = barwidth) +
-    geom_text(aes(label=helper_percentage(.data$freq, 2)), hjust = texthjust, size = textsize, color = textcolor, family = "Roboto") +
+    geom_text(aes(label=helper_percentage(.data$freq, 1)), hjust = texthjust, size = textsize, color = textcolor, family = "Roboto") +
     labs(title = "",
          subtitle = "",
          caption = n_par(data, {{item}})) +
-    coord_flip() +
+    coord_flip(clip = "off") +
     theme_sep() +
     theme(axis.text.x = element_blank(),
           panel.grid.major.y = element_blank(),

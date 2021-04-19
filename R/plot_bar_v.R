@@ -14,7 +14,7 @@
 #' @import ggplot2
 #'
 #'
-plot_bar_v <- function(data = currentwave, item, barcolor = "#1F407A", barwidth = 0.8, textvjust = 1.7, textsize = 4, textcolor = "white"){
+plot_bar_v <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, textvjust = -0.5, textsize = 4, textcolor = "white"){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%
@@ -23,7 +23,7 @@ plot_bar_v <- function(data = currentwave, item, barcolor = "#1F407A", barwidth 
     mutate(freq = n/sum(n)) %>%
     ggplot(aes(x = as.factor({{item}}), y = .data$freq)) +
     geom_col(fill = barcolor, width = barwidth) +
-    geom_text(aes(label=helper_percentage(.data$freq, 2)), vjust = textvjust, size = textsize, color = textcolor, family = "Roboto") +
+    geom_text(aes(label=helper_percentage(.data$freq, 1)), vjust = textvjust, size = textsize, color = textcolor, family = "Roboto") +
     labs(title = "",
          subtitle = "",
          caption = n_par(data, {{item}})) +

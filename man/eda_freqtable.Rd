@@ -4,7 +4,7 @@
 \alias{eda_freqtable}
 \title{Calculates a frequency table for a single survey item}
 \usage{
-eda_freqtable(data = currentwave, item, rm.dk = FALSE)
+eda_freqtable(data, item, rm.dk = FALSE)
 }
 \arguments{
 \item{data}{a \code{data.frame} object}

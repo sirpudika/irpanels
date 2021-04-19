@@ -5,11 +5,11 @@
 \title{Simple horizontal barplot}
 \usage{
 plot_bar_h(
-  data = currentwave,
+  data,
   item,
   barcolor = "#1F407A",
   barwidth = 0.8,
-  texthjust = 1.2,
+  texthjust = -0.2,
   textsize = 4,
   textcolor = "white"
 )

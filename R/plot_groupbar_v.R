@@ -14,7 +14,7 @@
 #' @import dplyr
 #' @import ggplot2
 #'
-plot_groupbar_v <- function(data = currentwave, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
+plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
   data %>%
     filter({{item}} > -8,
            {{by}} > -8) %>%

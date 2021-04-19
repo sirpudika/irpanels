@@ -4,7 +4,7 @@
 \alias{eda_crosstable}
 \title{Calculates a frequency table for two survey items}
 \usage{
-eda_crosstable(data = currentwave, items, rm.dk = FALSE, itemnames = NULL)
+eda_crosstable(data, items, rm.dk = FALSE, itemnames = NULL)
 }
 \arguments{
 \item{data}{a \code{data.frame} object}

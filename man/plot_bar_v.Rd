@@ -5,11 +5,11 @@
 \title{Simple vertical barplot}
 \usage{
 plot_bar_v(
-  data = currentwave,
+  data,
   item,
   barcolor = "#1F407A",
   barwidth = 0.8,
-  textvjust = 1.7,
+  textvjust = -0.5,
   textsize = 4,
   textcolor = "white"
 )

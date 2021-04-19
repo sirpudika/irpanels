@@ -5,7 +5,7 @@
 \title{Grouped horizontal barplot}
 \usage{
 plot_groupbar_h(
-  data = currentwave,
+  data,
   item,
   by,
   barpadding = 0.1,

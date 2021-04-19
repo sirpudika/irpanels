@@ -11,7 +11,7 @@ plot_bar_v(
   barwidth = 0.8,
   textvjust = -0.5,
   textsize = 4,
-  textcolor = "white"
+  textcolor = "black"
 )
 }
 \arguments{

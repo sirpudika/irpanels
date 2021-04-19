@@ -3,6 +3,7 @@
 export("%>%")
 export(eda_crosstable)
 export(eda_freqtable)
+export(helper_percentage)
 export(n_par)
 export(plot_bar_h)
 export(plot_bar_v)

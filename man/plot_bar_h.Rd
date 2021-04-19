@@ -11,7 +11,7 @@ plot_bar_h(
   barwidth = 0.8,
   texthjust = -0.2,
   textsize = 4,
-  textcolor = "white"
+  textcolor = "black"
 )
 }
 \arguments{

@@ -14,7 +14,7 @@
 #' @import ggplot2
 #'
 #'
-plot_bar_v <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, textvjust = -0.5, textsize = 4, textcolor = "white"){
+plot_bar_v <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, textvjust = -0.5, textsize = 4, textcolor = "black"){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%

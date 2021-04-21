@@ -10,7 +10,7 @@ plot_bar_v(
   barcolor = "#1F407A",
   barwidth = 0.8,
   textvjust = -0.5,
-  textsize = 4,
+  textsize = 3.5,
   textcolor = "black"
 )
 }

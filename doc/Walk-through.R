@@ -19,36 +19,35 @@ library(ggplot2)
 
 ## -----------------------------------------------------------------------------
 load("upanel_w5.RData")
-eda_loadtoenv(w5)
 
 ## -----------------------------------------------------------------------------
-eda_freqtable(item = w5_q27)
-eda_freqtable(item = w5_q27, rm.dk = T)
+eda_freqtable(w5, item = w5_q27)
+eda_freqtable(w5, item = w5_q27, rm.dk = T)
 
 ## -----------------------------------------------------------------------------
-eda_crosstable(items = c("w5_q2", "w5_q11"))
+eda_crosstable(w5, items = c("w5_q2", "w5_q11"))
 
 ## -----------------------------------------------------------------------------
-eda_participants(item = w5_q11)
-eda_participants(item = w5_q27)
+n_par(w5, item = w5_q11)
+n_par(w5, item = w5_q27)
 
 ## -----------------------------------------------------------------------------
-plot_bar_v(item = w5_q11)
-plot_bar_h(item = w5_q11)
+plot_bar_v(w5, item = w5_q11)
+plot_bar_h(w5, item = w5_q11)
 
 ## -----------------------------------------------------------------------------
-plot_bar_h(item = w5_q11, dk_share = 12) +
+plot_bar_h(w5, item = w5_q11) +
     scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 
 ## -----------------------------------------------------------------------------
-eda_freqtable(item = w5_q11)
-plot_groupbar_h(item = w5_q11, grouper = w5_q2, dk_share = 12, labels = c("Male", "Female")) +
+eda_freqtable(w5, item = w5_q11)
+plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 
 ## -----------------------------------------------------------------------------
 options(ggplot2.discrete.fill= c("#59C3C3", "#52489C"))
 
 ## -----------------------------------------------------------------------------
-plot_groupbar_h(item = w5_q11, grouper = w5_q2, dk_share = 12, labels = c("Male", "Female")) +
+plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 

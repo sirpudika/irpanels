@@ -15,7 +15,7 @@
 #' @importFrom rlang .data
 #' @import forcats
 #'
-plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = -0.2, textsize = 4, textcolor = "black"){
+plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = -0.2, textsize = 3.5, textcolor = "black"){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%

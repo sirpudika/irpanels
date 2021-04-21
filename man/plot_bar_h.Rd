@@ -10,7 +10,7 @@ plot_bar_h(
   barcolor = "#1F407A",
   barwidth = 0.8,
   texthjust = -0.2,
-  textsize = 4,
+  textsize = 3.5,
   textcolor = "black"
 )
 }

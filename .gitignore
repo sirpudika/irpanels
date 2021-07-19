@@ -4,4 +4,4 @@
 .DS_Store
 inst/doc
 doc
-Meta
+vignettes/upanel_w5.RData

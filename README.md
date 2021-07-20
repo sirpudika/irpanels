@@ -1,5 +1,5 @@
 # Hi there! 🌳
-`sep` is a little package to help you wrangle with and visualize the data from the Swiss Environmental Panel more easily. 
+`sep` is a little package to help you wrangle with and visualize the data from the Swiss Environmental Panel. 
 
 ## What is the Swiss Environmental Panel? 
 
@@ -7,6 +7,6 @@ The Swiss Environmental Panel is based on a random sample of the Swiss populatio
 
 ## How does `sep` help me?
 
-`sep` helps project collaborators to automate the data analysis and visualisations for the survey reports. The various functions of the package are designed to facilitate this process from start to finish. For common practices in exploratory data analysis, the `eda_*` functions contain the most common operations. The `plot_*` functions, on the other hand, simplify visualisations. Finally, `cb_*` functions are planned to automate the creation of our codebooks partially. 
+`sep` helps project collaborators to automate the data analysis and visualisations for the survey reports. The various functions are designed to facilitate this process from start to finish. For exploratory data analysis, the `eda_*` functions contain the most common operations. The `plot_*` functions, on the other hand, simplify visualisations once the data has been cleaned. Finally, `cb_*` functions are planned to partially automate the creation of our codebooks. 
 
 You can find the vignette here: https://bonschorno.github.io/sep/doc/Walk-through.html

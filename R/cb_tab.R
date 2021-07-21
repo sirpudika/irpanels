@@ -6,7 +6,6 @@
 #' @param .codes codes placeholder
 #' @param .codes.en codes.en placeholder
 #' @param .miscodes miscodes placeholder
-#' @param .dkno dkno placeholder
 #' @param .str_dk str_dk placeholder
 #' @param .str_no str_no placeholder
 #' @param lbl.space lbl.space placeholder
@@ -16,18 +15,18 @@
 #' @return Table from Kable in Latex Format
 #' @export
 #'
-#' @import kableExtra
+#' @importFrom kableExtra kable pack_rows kable_styling column_spec
 #'
 cb_tab <-
   function(data = upanel.meta, num.var,
            .meta = meta, .codes = codes, .codes.en = codes.en, .miscodes = miscodes,
-           .dkno = dkno, .str_dk = str_dk, .str_no = str_no,
+           .str_dk = str_dk, .str_no = str_no,
            lbl.space = "1em", lblen.space = "1em", mis.space = "1em"){
 
     values = c(.codes[!is.na(data[.codes, num.var])],
                .codes.en[!is.na(data[.codes.en, num.var])])
 
-    dkno_code = .dkno(data, num.var, .str_dk, .str_no)[-1]
+    dkno_code = cb_dkno(data, num.var, .str_dk, .str_no)[-1]
 
     if(length(values) == 0){
 

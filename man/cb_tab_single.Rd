@@ -7,7 +7,6 @@
 cb_tab_single(
   num.var,
   data = upanel.meta,
-  .cbtab = cbtab,
   comment = "",
   lbl.space = "1em",
   lblen.space = "1em",
@@ -18,8 +17,6 @@ cb_tab_single(
 \item{num.var}{num.var placeholder}
 
 \item{data}{a \code{data.frame} object}
-
-\item{.cbtab}{.cbtab placeholder}
 
 \item{comment}{comment placeholder}
 

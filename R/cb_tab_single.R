@@ -6,17 +6,16 @@
 #' @param lbl.space lbl.space placeholder
 #' @param lblen.space lblen.space placeholder
 #' @param mis.space mis.space placeholder
-#' @param .cbtab .cbtab placeholder
 #'
 #' @return Latex document with Table from Kable<
 #' @export
 #'
 cb_tab_single <-
-  function(num.var, data = upanel.meta, .cbtab = cbtab,
+  function(num.var, data = upanel.meta,
            comment = "", lbl.space = "1em", lblen.space = "1em", mis.space = "1em"){
     cat("###", as.character(data[1, num.var]), sep = " ")
     cat("\n")
-    print(.cbtab(num.var = num.var, lbl.space = lbl.space,
+    print(cb_tab(data = data, num.var = num.var, lbl.space = lbl.space,
                  lblen.space = lblen.space, mis.space = mis.space))
     cat("\n")
     cat(comment, sep = "\n")

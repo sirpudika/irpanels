@@ -11,7 +11,6 @@ cb_tab(
   .codes = codes,
   .codes.en = codes.en,
   .miscodes = miscodes,
-  .dkno = dkno,
   .str_dk = str_dk,
   .str_no = str_no,
   lbl.space = "1em",
@@ -31,8 +30,6 @@ cb_tab(
 \item{.codes.en}{codes.en placeholder}
 
 \item{.miscodes}{miscodes placeholder}
-
-\item{.dkno}{dkno placeholder}
 
 \item{.str_dk}{str_dk placeholder}
 

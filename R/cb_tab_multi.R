@@ -1,8 +1,8 @@
 #'  Creates Page with Table in Codebook for multiple variabes
 #'
-#' @param num.var num.var placeholder
+#' @param num.var add the number of the variable
 #' @param data  a \code{data.frame} object
-#' @param comment comment placeholder
+#' @param comment add a comment under the codebook table
 #' @param lbl.space lbl.space placeholder
 #' @param lblen.space lblen.space placeholder
 #' @param mis.space mis.space placeholder

@@ -1,13 +1,13 @@
 #' Creates Page with Table in Codebook for a single variabe
 #'
-#' @param num.var num.var placeholder
 #' @param data  a \code{data.frame} object
-#' @param comment comment placeholder
-#' @param lbl.space lbl.space placeholder
-#' @param lblen.space lblen.space placeholder
-#' @param mis.space mis.space placeholder
+#' @param num.var single numeric value referring to column index
+#' @param comment optional string argument printed below the codebook table
+#' @param lbl.space optional argument to adjust table space between variable information and value labels
+#' @param lblen.space optional argument to adjust table space between value labels and value labels in English
+#' @param mis.space optional argument to adjust table space between value labels in English and missing labels
 #'
-#' @return Latex document with Table from Kable<
+#' @return codebook page(s) for single variable in Latex format
 #' @export
 #'
 cb_tab_single <-

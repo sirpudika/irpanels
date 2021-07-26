@@ -4,11 +4,11 @@
 #' It detects whether a given variable has "Don't Know" or "None"  response labels.
 #'
 #' @param data a \code{data.frame} object
-#' @param num.var numvar placeholder
-#' @param .str_dk str_dk placeholder
-#' @param .str_no str_no placeholder
+#' @param num.var single numeric value referring to column index
+#' @param .str_dk a character vector including all response options that are coded as -8 ("Don't Know" category)
+#' @param .str_no a character vector including all response options that are coded as -9 ("None" category)
 #'
-#' @return cb_dkno object
+#' @return named integer vector
 #' @export
 #'
 cb_dkno <- function(data = upanel.meta, num.var, .str_dk = str_dk, .str_no = str_no){

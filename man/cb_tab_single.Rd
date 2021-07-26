@@ -14,20 +14,20 @@ cb_tab_single(
 )
 }
 \arguments{
-\item{num.var}{num.var placeholder}
+\item{num.var}{single numeric value referring to column index}
 
 \item{data}{a \code{data.frame} object}
 
-\item{comment}{comment placeholder}
+\item{comment}{optional string argument printed below the codebook table}
 
-\item{lbl.space}{lbl.space placeholder}
+\item{lbl.space}{optional argument to adjust table space between variable information and value labels}
 
-\item{lblen.space}{lblen.space placeholder}
+\item{lblen.space}{optional argument to adjust table space between value labels and value labels in English}
 
-\item{mis.space}{mis.space placeholder}
+\item{mis.space}{optional argument to adjust table space between value labels in English and missing labels}
 }
 \value{
-Latex document with Table from Kable<
+codebook page(s) for single variable in Latex format
 }
 \description{
 Creates Page with Table in Codebook for a single variabe

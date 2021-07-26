@@ -14,22 +14,20 @@ cb_tab_multi(
 )
 }
 \arguments{
-\item{multi.vars}{multi.vars placeholder}
+\item{multi.vars}{numeric vector referring to column indeces}
 
 \item{data}{a \code{data.frame} object}
 
-\item{comment}{comment placeholder}
+\item{comment}{optional string argument printed below the codebook table}
 
-\item{lbl.space}{lbl.space placeholder}
+\item{lbl.space}{optional argument to adjust table space between variable information and value labels}
 
-\item{lblen.space}{lblen.space placeholder}
+\item{lblen.space}{optional argument to adjust table space between value labels and value labels in English}
 
-\item{mis.space}{mis.space placeholder}
-
-\item{num.var}{num.var placeholder}
+\item{mis.space}{optional argument to adjust table space between value labels in English and missing labels}
 }
 \value{
-cb_tab_multi object
+codebook pages for multiple variables in Latex format
 }
 \description{
 Creates Page with Table in Codebook for multiple variabes

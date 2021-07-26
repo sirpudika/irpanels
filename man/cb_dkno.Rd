@@ -9,14 +9,14 @@ cb_dkno(data = upanel.meta, num.var, .str_dk = str_dk, .str_no = str_no)
 \arguments{
 \item{data}{a \code{data.frame} object}
 
-\item{num.var}{numvar placeholder}
+\item{num.var}{single numeric value referring to column index}
 
-\item{.str_dk}{str_dk placeholder}
+\item{.str_dk}{a character vector including all response options that are coded as -8 ("Don't Know" category)}
 
-\item{.str_no}{str_no placeholder}
+\item{.str_no}{a character vector including all response options that are coded as -9 ("None" category)}
 }
 \value{
-cb_dkno object
+named integer vector
 }
 \description{
 This is mainly a helper function for the creation of the codebook table.

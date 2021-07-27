@@ -1,14 +1,13 @@
 #'  Creates Page with Table in Codebook for multiple variabes
 #'
-#' @param num.var add the number of the variable
 #' @param data  a \code{data.frame} object
-#' @param comment add a comment under the codebook table
-#' @param lbl.space lbl.space placeholder
-#' @param lblen.space lblen.space placeholder
-#' @param mis.space mis.space placeholder
-#' @param multi.vars multi.vars placeholder
+#' @param multi.vars numeric vector referring to column indeces
+#' @param comment optional string argument printed below the codebook table
+#' @param lbl.space optional argument to adjust table space between variable information and value labels
+#' @param lblen.space optional argument to adjust table space between value labels and value labels in English
+#' @param mis.space optional argument to adjust table space between value labels in English and missing labels
 #'
-#' @return cb_tab_multi object
+#' @return codebook pages for multiple variables in Latex format
 #' @export
 #'
 cb_tab_multi <-

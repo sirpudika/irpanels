@@ -1,18 +1,18 @@
 #' Creates a Codebook Table for a given variable (row)
 #'
-#' @param data data placeholder
-#' @param num.var num.var placeholder
-#' @param .meta meta placeholder
-#' @param .codes codes placeholder
-#' @param .codes.en codes.en placeholder
+#' @param data a \code{data.frame} object
+#' @param num.var single numeric value referring to column index
+#' @param .meta numeric vector referring to row indices of variable information
+#' @param .codes numeric vector referring to row indices of variable codes and labels
+#' @param .codes.en numeric vector referring to row indices of variable codes and labels in English
 #' @param .miscodes miscodes placeholder
-#' @param .str_dk str_dk placeholder
-#' @param .str_no str_no placeholder
-#' @param lbl.space lbl.space placeholder
-#' @param lblen.space lblen.space placeholder
-#' @param mis.space mis.space placeholder
+#' @param .str_dk a character vector including all response options that are coded as -8 ("Don't Know" category)
+#' @param .str_no a character vector including all response options that are coded as -9 ("None" category)
+#' @param lbl.space optional argument to adjust table space between variable information and value labels
+#' @param lblen.space optional argument to adjust table space between value labels and value labels in English
+#' @param mis.space optional argument to adjust table space between value labels in English and missing labels
 #'
-#' @return Table from Kable in Latex Format
+#' @return codebook table in Latex format
 #' @export
 #'
 #' @importFrom kableExtra kable pack_rows kable_styling column_spec

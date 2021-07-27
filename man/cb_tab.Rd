@@ -19,30 +19,30 @@ cb_tab(
 )
 }
 \arguments{
-\item{data}{data placeholder}
+\item{data}{a \code{data.frame} object}
 
-\item{num.var}{num.var placeholder}
+\item{num.var}{single numeric value referring to column index}
 
-\item{.meta}{meta placeholder}
+\item{.meta}{numeric vector referring to row indices of variable information}
 
-\item{.codes}{codes placeholder}
+\item{.codes}{numeric vector referring to row indices of variable codes and labels}
 
-\item{.codes.en}{codes.en placeholder}
+\item{.codes.en}{numeric vector referring to row indices of variable codes and labels in English}
 
 \item{.miscodes}{miscodes placeholder}
 
-\item{.str_dk}{str_dk placeholder}
+\item{.str_dk}{a character vector including all response options that are coded as -8 ("Don't Know" category)}
 
-\item{.str_no}{str_no placeholder}
+\item{.str_no}{a character vector including all response options that are coded as -9 ("None" category)}
 
-\item{lbl.space}{lbl.space placeholder}
+\item{lbl.space}{optional argument to adjust table space between variable information and value labels}
 
-\item{lblen.space}{lblen.space placeholder}
+\item{lblen.space}{optional argument to adjust table space between value labels and value labels in English}
 
-\item{mis.space}{mis.space placeholder}
+\item{mis.space}{optional argument to adjust table space between value labels in English and missing labels}
 }
 \value{
-Table from Kable in Latex Format
+codebook table in Latex format
 }
 \description{
 Creates a Codebook Table for a given variable (row)

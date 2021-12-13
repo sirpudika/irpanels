@@ -16,7 +16,7 @@ eda_crosstable(data, items, rm.dk = FALSE, itemnames = NULL)
 \item{itemnames}{optional argument for specifying the survey items' names}
 }
 \value{
-a table with relative frequencies
+a table with relative frequencies (in percent)
 }
 \description{
 Calculates a frequency table for two survey items

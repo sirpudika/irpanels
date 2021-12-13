@@ -6,24 +6,24 @@
 #' @param barwidth optional argument to define the width of the bar
 #' @param textvjust optional argument to adjust the text's horizontal alignment
 #' @param textsize optional argument to adjust the text's size
-#' @param textcolor optional argument to adjust the text's colour (default to white)
 #'
 #' @return a vertical barplot
 #' @export
 #'
 #' @import ggplot2
+#' @import ggfittext
 #'
 #'
-plot_bar_v <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, textvjust = -0.5, textsize = 3.5, textcolor = "black"){
+plot_bar_v <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, textvjust = 2, textsize = 3.5){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%
     count() %>%
     ungroup() %>%
     mutate(freq = n/sum(n)) %>%
-    ggplot(aes(x = as.factor({{item}}), y = .data$freq)) +
+    ggplot(aes(x = as.factor({{item}}), y = .data$freq, label = helper_percentage(.data$freq, 1))) +
     geom_col(fill = barcolor, width = barwidth) +
-    geom_text(aes(label=helper_percentage(.data$freq, 1)), vjust = textvjust, size = textsize, color = textcolor, family = "Roboto") +
+    geom_bar_text(min.size = 8, reflow = TRUE, family = "Roboto", padding.y = grid::unit(textvjust, "mm"), outside = TRUE) +
     labs(title = "",
          subtitle = "",
          caption = n_par(data, {{item}})) +

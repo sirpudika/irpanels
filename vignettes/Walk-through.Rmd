@@ -31,7 +31,14 @@ library(dplyr)
 library(ggplot2)
 ```
 
-FYI: The dataset used is not publicly accessible for data protection reasons. However, it can be requested [here](https://istp.ethz.ch/research/sep.html).
+Currently, `sep` offers the following functions:
+
+```{r, echo=FALSE}
+ls("package:sep")
+```
+
+
+FYI: The dataset used here is not publicly accessible for data protection reasons. However, it can be requested [here](https://istp.ethz.ch/research/sep.html).
 
 ```{r}
 load("upanel_w5.RData")
@@ -48,13 +55,7 @@ To calculate the relative frequencies based on two variables, you can use `eda_c
 
 ```{r}
 eda_crosstable(w5, items = c("w5_q2", "w5_q11"))
-```
-
-The last of the preliminary helper functions for exploratory data analysis is `n_par`. This function can be used to quickly determine how many participants have seen the corresponding survey item.
-
-```{r}
-n_par(w5, item = w5_q11)
-n_par(w5, item = w5_q27)
+eda_crosstable(w5, items = c("w5_q2", "w5_q11"), rm.dk = TRUE)
 ```
 
 ## Visualizations

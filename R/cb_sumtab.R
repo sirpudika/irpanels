@@ -6,7 +6,7 @@
 #' @param na_sep a boolean indicating use of SEP coding rules (defaults to TRUE)
 #' @param type a character indicating variable type (factor, numeric)
 #'
-#' @return table with counts (for factors) or descriptive summary (for numerics) of responses
+#' @return table with counts (for factors) or descriptive summary (for numerics) of responses in Latex format
 #' @export
 #'
 #' @importFrom kableExtra kable kable_styling

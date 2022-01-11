@@ -9,9 +9,8 @@ plot_bar_h(
   item,
   barcolor = "#1F407A",
   barwidth = 0.8,
-  texthjust = -0.2,
-  textsize = 3.5,
-  textcolor = "black"
+  texthjust = 2,
+  textsize = 3.5
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ plot_bar_h(
 \item{texthjust}{optional argument to adjust the text's horizontal alignment}
 
 \item{textsize}{optional argument to adjust the text's size}
-
-\item{textcolor}{optional argument to adjust the text's colour (default to white)}
 }
 \value{
 a horizontal barplot

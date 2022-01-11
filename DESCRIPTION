@@ -20,6 +20,7 @@ Imports:
     magrittr,
     dplyr,
     ggplot2,
+    ggfittext,
     rlang,
     scales,
     forcats,

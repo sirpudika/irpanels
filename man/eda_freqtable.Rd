@@ -14,7 +14,7 @@ eda_freqtable(data, item, rm.dk = FALSE)
 \item{rm.dk}{a logical value indicating whether "Don't know" values (-8) should be stripped before the computation proceeds}
 }
 \value{
-a frequency table
+a frequency table (in percent)
 }
 \description{
 Calculates a frequency table for a single survey item

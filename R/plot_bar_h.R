@@ -6,7 +6,6 @@
 #' @param barwidth optional argument to define the width of the bar
 #' @param texthjust optional argument to adjust the text's horizontal alignment
 #' @param textsize optional argument to adjust the text's size
-#' @param textcolor optional argument to adjust the text's colour (default to white)
 #'
 #' @return a horizontal barplot
 #' @export
@@ -14,17 +13,18 @@
 #' @import ggplot2
 #' @importFrom rlang .data
 #' @import forcats
+#' @import ggfittext
 #'
-plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = -0.2, textsize = 3.5, textcolor = "black"){
+plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = 2, textsize = 3.5){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%
     count() %>%
     ungroup() %>%
     mutate(freq = n/sum(n)) %>%
-    ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq)) +
+    ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq, label = helper_percentage(.data$freq, 1))) +
     geom_col(fill = barcolor, width = barwidth) +
-    geom_text(aes(label=helper_percentage(.data$freq, 1)), hjust = texthjust, size = textsize, color = textcolor, family = "Roboto") +
+    geom_bar_text(min.size = textsize, family = "Roboto", padding.x = grid::unit(texthjust, "mm"), outside = TRUE) +
     labs(title = "",
          subtitle = "",
          caption = n_par(data, {{item}})) +

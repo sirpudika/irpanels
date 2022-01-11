@@ -9,9 +9,8 @@ plot_bar_v(
   item,
   barcolor = "#1F407A",
   barwidth = 0.8,
-  textvjust = -0.5,
-  textsize = 3.5,
-  textcolor = "black"
+  textvjust = 2,
+  textsize = 3.5
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ plot_bar_v(
 \item{textvjust}{optional argument to adjust the text's horizontal alignment}
 
 \item{textsize}{optional argument to adjust the text's size}
-
-\item{textcolor}{optional argument to adjust the text's colour (default to white)}
 }
 \value{
 a vertical barplot

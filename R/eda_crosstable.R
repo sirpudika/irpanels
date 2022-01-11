@@ -5,7 +5,7 @@
 #' @param rm.dk a logical value indicating whether "Don't know" values (-8) should be stripped before the computation proceeds
 #' @param itemnames optional argument for specifying the survey items' names
 #'
-#' @return a table with relative frequencies
+#' @return a table with relative frequencies (in percent)
 #' @export
 #'
 #' @examples
@@ -28,6 +28,6 @@ eda_crosstable<- function(data, items, rm.dk = FALSE, itemnames = NULL){
   } else {
     table <- table(df, dnn = itemnames)
   }
-  prop_table <- round(prop.table(table), digits = 3)
-  prop_table
+  prop_table <- round(prop.table(table), digits = 4)
+  prop_table*100
 }

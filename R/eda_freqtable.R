@@ -4,7 +4,7 @@
 #' @param item a survey item
 #' @param rm.dk a logical value indicating whether "Don't know" values (-8) should be stripped before the computation proceeds
 #'
-#' @return a frequency table
+#' @return a frequency table (in percent)
 #' @export
 #'
 #' @examples
@@ -21,5 +21,6 @@ eda_freqtable <- function(data, item, rm.dk = FALSE){
   }
 
   vec <- pull(df, {{item}})
-  round(prop.table(table(vec, dnn = "Relative frequencies:")), digits = 2)
+  table <- round(prop.table(table(vec, dnn = "Relative frequencies:")), digits = 4)
+  table*100
 }

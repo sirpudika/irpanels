@@ -1,17 +1,16 @@
-#' Summary Table of survey data for Codebook
+#' Summary Table of responses for codebook
 #'
-#' @param metadata
-#' @param response
-#' @param num.var
-#' @param na_sep
-#' @param type
+#' @param metadata a \code{data.frame} object with survey metadata
+#' @param response a \code{data.frame} object with survey response data
+#' @param num.var single numeric value indexing column of variable in metadata
+#' @param na_sep a boolean indicating use of SEP coding rules (defaults to TRUE)
+#' @param type a character indicating variable type (factor, numeric)
 #'
-#' @return summary table for factor or numeric variables
+#' @return table with counts (for factors) or descriptive summary (for numerics) of responses
 #' @export
 #'
 #' @importFrom kableExtra kable kable_styling
 #'
-#' @examples
 cb_sumtab = function(metadata, response, num.var, na_sep = TRUE, type){
 
   name = as.character(metadata[1, num.var])

@@ -1,12 +1,12 @@
 #' Summary Plot of responses for codebook
 #'
-#' @param metadata
-#' @param response
-#' @param num.var
-#' @param na_sep
-#' @param stats
+#' @param metadata a \code{data.frame} object with survey metadata
+#' @param response a \code{data.frame} object with survey response data
+#' @param num.var single numeric value indexing column of variable in metadata
+#' @param na_sep a boolean indicating use of SEP coding rules (defaults to TRUE)
+#' @param stats a character indicating plotted statistic (count, density)
 #'
-#' @return
+#' @return plot with counts or density of responses
 #' @export
 #'
 #' @import ggplot2

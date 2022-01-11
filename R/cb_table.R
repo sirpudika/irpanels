@@ -3,8 +3,8 @@
 #' @param metadata a \code{data.frame} object with survey metadata
 #' @param num.var single numeric value indexing column of variable in metadata
 #' @param .meta numeric vector indexing rows of variable information in metadata (defaults to meta)
-#' @param .codes numeric vector indexing rows of German value labels in metadata (defaults to codes)
-#' @param .codes.en numeric vector indexing rows of English value labels in metadata (defaults to codes.en)
+#' @param .codes_de numeric vector indexing rows of German value labels in metadata (defaults to codes_de)
+#' @param .codes_en numeric vector indexing rows of English value labels in metadata (defaults to codes_en)
 #' @param .miscodes numeric vector indexing rows of missing labels in metadata (defaults to miscodes)
 #' @param lbl.space optional argument to adjust table space between variable information and German value labels (defaults to 1em)
 #' @param lblen.space optional argument to adjust table space between German value labels and English value labels (defaults to 1em)
@@ -15,13 +15,13 @@
 #'
 #' @importFrom kableExtra kable pack_rows kable_styling column_spec
 #'
-cb_tab <-
+cb_table <-
   function(metadata, num.var,
-           .meta = meta, .codes = codes, .codes.en = codes.en, .miscodes = miscodes,
+           .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes,
            lbl.space = "1em", lblen.space = "1em", mis.space = "1em"){
 
-    values = c(.codes[!is.na(metadata[.codes, num.var])],
-               .codes.en[!is.na(metadata[.codes.en, num.var])])
+    values = c(.codes_de[!is.na(metadata[.codes_de, num.var])],
+               .codes_en[!is.na(metadata[.codes_en, num.var])])
 
     if(length(values) == 0){
 

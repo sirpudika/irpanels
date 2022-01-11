@@ -10,12 +10,12 @@
 #' @return codebook page for one variable in Latex format
 #' @export
 #'
-cb_tab_single <-
-  function(num.var, metadata,
+cb_page <-
+  function(metadata, num.var,
            comment = "", lbl.space = "1em", lblen.space = "1em", mis.space = "1em"){
     cat("###", as.character(metadata[1, num.var]), sep = " ")
     cat("\n")
-    print(cb_tab(metadata = metadata, num.var = num.var, lbl.space = lbl.space,
+    print(cb_table(metadata = metadata, num.var = num.var, lbl.space = lbl.space,
                  lblen.space = lblen.space, mis.space = mis.space))
     cat("\n")
     cat(comment, sep = "\n")

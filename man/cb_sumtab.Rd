@@ -18,7 +18,7 @@ cb_sumtab(metadata, response, num.var, na_sep = TRUE, type)
 \item{type}{a character indicating variable type (factor, numeric)}
 }
 \value{
-table with counts (for factors) or descriptive summary (for numerics) of responses
+table with counts (for factors) or descriptive summary (for numerics) of responses in Latex format
 }
 \description{
 Summary Table of responses for codebook

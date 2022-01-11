@@ -11,17 +11,17 @@
 #' @return named integer vector
 #' @export
 #'
-cb_dkno <- function(data = upanel.meta, num.var, .str_dk = str_dk, .str_no = str_no){
+cb_dkno <- function(metadata, num.var, .str_dk = str_dk, .str_no = str_no){
 
-  is_dk <- sum(sapply(.str_dk, grepl, data["-8", num.var]))
-  is_no <- sum(sapply(.str_no, grepl, data["-9", num.var]))
+  is_dk <- sum(sapply(.str_dk, grepl, metadata["-8", num.var]))
+  is_no <- sum(sapply(.str_no, grepl, metadata["-9", num.var]))
   is_dkno <- sum(is_dk, is_no)
 
 
-  dk_num = which(rownames(upanel.meta) == "-8")
-  no_num = which(rownames(upanel.meta) == "-9")
-  dk_num_en = which(rownames(upanel.meta) == "-8 (EN)")
-  no_num_en = which(rownames(upanel.meta) == "-9 (EN)")
+  dk_num = which(rownames(metadata) == "-8")
+  no_num = which(rownames(metadata) == "-9")
+  dk_num_en = which(rownames(metadata) == "-8 (EN)")
+  no_num_en = which(rownames(metadata) == "-9 (EN)")
 
   if(is_dk > 0 & is_no > 0){
     dkno_code <- c(is_dkno, dk_num, no_num, dk_num_en, no_num_en)

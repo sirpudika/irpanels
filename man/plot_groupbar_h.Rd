@@ -4,15 +4,7 @@
 \alias{plot_groupbar_h}
 \title{Grouped horizontal barplot}
 \usage{
-plot_groupbar_h(
-  data,
-  item,
-  by,
-  barpadding = 0.1,
-  barwidth = 0.5,
-  legendtitle = "",
-  ...
-)
+plot_groupbar_h(data, item, by, barpadding = 0.1, legendtitle = "", ...)
 }
 \arguments{
 \item{data}{a \code{data.frame} object}
@@ -22,8 +14,6 @@ plot_groupbar_h(
 \item{by}{grouping variable}
 
 \item{barpadding}{optional argument to adjust padding between bars}
-
-\item{barwidth}{optional argument to define the bar's width}
 
 \item{legendtitle}{optional argument to define a legend title}
 

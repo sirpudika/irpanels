@@ -13,13 +13,13 @@
 #'
 cb_sumtab = function(metadata, response, num.var, na_sep = TRUE, type){
 
-  name = as.character(metadata[1, num.var])
+  name = as.character(metadata[num.var, "Variable name"])
   variable = response[[name]]
 
   if(type == "numeric"){
 
-    has_dk = ifelse(!is.na(metadata["-8", metadata["Variable name", ] == name]), "yes", "no")
-    has_no = ifelse(!is.na(metadata["-9", metadata["Variable name", ] == name]), "yes", "no")
+    has_dk = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
+    has_no = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
 
     # Get DK count if relevant for variable (SEP Coding)
     if(has_dk == "yes"){

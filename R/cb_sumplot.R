@@ -13,7 +13,7 @@
 #'
 cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
-  name = as.character(metadata[1, num.var])
+  name = as.character(metadata[num.var, "Variable name"])
   variable = response[[name]]
 
   if(stats == "count"){
@@ -27,7 +27,7 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     df$variable = fct_relevel(as.factor(df$variable), "NA")
 
-    caption = paste0("Number of total respondents: ", length(variable))
+    caption = paste0("Total number of respondents: ", length(variable))
 
     # Bar plot: value distribution
     barplot = ggplot(data = df) +
@@ -47,8 +47,8 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
   }else if(stats == "density"){
 
-    has_dk = ifelse(!is.na(metadata["-8", metadata["Variable name", ] == name]), "yes", "no")
-    has_no = ifelse(!is.na(metadata["-9", metadata["Variable name", ] == name]), "yes", "no")
+    has_dk = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
+    has_no = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
 
     na = sum(variable < -9)
     na_text = paste0("Number of NA values: ", na)

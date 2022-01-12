@@ -12,13 +12,13 @@
 #'
 cb_pages <-
   function(metadata, multi.vars,
-           comment = "", lbl.space = "1em", lblen.space = "1em", mis.space = "1em")
-  {
+           comment = "", lbl.space = "1em", lblen.space = "1em", mis.space = "1em"){
+
     for(var in multi.vars){
-      cat("###", as.character(metadata[1, var]), sep = " ")
-      cat("\n")
-      print(cb_table(metadata = metadata, num.var = var, lbl.space = lbl.space,
-                   lblen.space = lblen.space, mis.space = mis.space))
+
+      cb_table(metadata = metadata, num.var = var, lbl.space = lbl.space,
+                   lblen.space = lblen.space, mis.space = mis.space)
+
       cat("\n")
       cat(comment, sep = "\n")
       cat("\n")

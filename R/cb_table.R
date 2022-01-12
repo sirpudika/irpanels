@@ -20,39 +20,54 @@ cb_table <-
            .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes,
            lbl.space = "1em", lblen.space = "1em", mis.space = "1em"){
 
-    values = c(.codes_de[!is.na(metadata[.codes_de, num.var])],
-               .codes_en[!is.na(metadata[.codes_en, num.var])])
+    values = c(.codes_de[!is.na(metadata[num.var, .codes_de])],
+               .codes_en[!is.na(metadata[num.var, .codes_en])])
+
+    getinfo = metadata[num.var, sort(c(.meta, values, .miscodes))]
+
+    df = data.frame(names = colnames(getinfo), values = as.character(getinfo[1, ]))
+
+    name = as.character(metadata[num.var, "Variable name"])
 
     if(length(values) == 0){
 
-      metadata[sort(c(.meta, values, .miscodes)), num.var] %>%
+      cbtable = df %>%
         ##define table format
-        kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
+        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
         ##group missing labels
-        pack_rows("Missing Labels", length(.meta)+1,
+        kableExtra::pack_rows("Missing Labels", length(.meta)+1,
                   c(length(.meta)+length(.miscodes)),
                   latex_gap_space = mis.space, bold = F, italic = T) %>%
         ##define format specifications
-        kable_styling(latex_options = c("striped", "hold_position" )) %>%
-        column_spec(2, width = "35em")
+        kableExtra::kable_styling(latex_options = c("striped", "hold_position" )) %>%
+        kableExtra::column_spec(2, width = "35em")
+
+      cat("###", name, sep = " ")
+      print(cbtable)
+
     }else{
-      metadata[sort(c(.meta, values, .miscodes)), num.var] %>%
+
+      cbtable = df %>%
         ##define table format
-        kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
+        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
         ##group value labels (German)
-        pack_rows("Value Labels", length(.meta)+1,
+        kableExtra::pack_rows("Value Labels", length(.meta)+1,
                   c(length(.meta)+c(length(values)/2)),
                   latex_gap_space = lbl.space) %>%
         ##group value labels (English)
-        pack_rows("Value Labels (EN)",c(length(.meta)+c(length(values)/2)+1),
+        kableExtra::pack_rows("Value Labels (EN)",c(length(.meta)+c(length(values)/2)+1),
                   c(length(.meta)+length(values)),
                   latex_gap_space = lblen.space) %>%
         ##group . missing labels
-        pack_rows("Missing Labels",c(length(.meta)+length(values)+1),
+        kableExtra::pack_rows("Missing Labels",c(length(.meta)+length(values)+1),
                   c(length(.meta)+length(values)+length(.miscodes)),
                   latex_gap_space = mis.space, bold = F, italic = T) %>%
         ##define format specifications
-        kable_styling(latex_options = c("striped", "hold_position" )) %>%
-        column_spec(2, width = "35em")
+        kableExtra::kable_styling(latex_options = c("striped", "hold_position" )) %>%
+        kableExtra::column_spec(2, width = "35em")
+
+      cat("###", name, sep = " ")
+      print(cbtable)
+
     }
   }

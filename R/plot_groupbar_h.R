@@ -17,6 +17,7 @@
 
 #'
 plot_groupbar_h <- function(data, item, by, barpadding = 0.1, legendtitle = "", ...){
+
   data %>%
     filter({{item}} > -8,
            {{by}} > -8) %>%
@@ -28,7 +29,7 @@ plot_groupbar_h <- function(data, item, by, barpadding = 0.1, legendtitle = "", 
     geom_col(position = position_dodge2(padding = barpadding)) +
     geom_bar_text(family = "Roboto", min.size = 3, position = "dodge", fullheight = TRUE, color = "white", contrast = TRUE) +
     scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
-    scale_fill_discrete(guide = guide_legend(reverse = TRUE), ...) +
+    scale_fill_manual(...) +
     coord_flip() +
     labs(title = "",
          subtitle = "",

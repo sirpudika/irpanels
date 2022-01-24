@@ -13,7 +13,7 @@
 #'
 #' @import dplyr
 #' @import ggplot2
-#' @import ggfitext
+#' @import ggfittext
 #'
 plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
   data %>%

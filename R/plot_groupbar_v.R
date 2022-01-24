@@ -13,6 +13,7 @@
 #'
 #' @import dplyr
 #' @import ggplot2
+#' @import ggfitext
 #'
 plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
   data %>%
@@ -22,10 +23,11 @@ plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, le
     count() %>%
     group_by({{item}}) %>%
     mutate(freq = n/sum(n)) %>%
-    ggplot(aes(x = as.factor({{item}}), y = .data$freq, fill = as.factor({{by}}))) +
-    geom_col(position = position_dodge2(padding = barpadding), width = barwidth) +
+    ggplot(aes(x = as.factor({{item}}), y = .data$freq, fill = as.factor({{by}}), label = helper_percentage(.data$freq, 1))) +
+    geom_col(position = position_dodge2(padding = barpadding)) +
+    geom_bar_text(family = "Roboto", position = "dodge", fullheight = TRUE, color = "white", contrast = TRUE) +
     scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
-    scale_fill_discrete(...) +
+    scale_fill_manual(...) +
     labs(title = "",
          subtitle = "",
          fill = legendtitle,
@@ -34,6 +36,7 @@ plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, le
     theme(panel.grid.major.x = element_blank(),
           panel.grid.major.y = element_line(linetype = "dashed"),
           legend.position = "bottom",
-          plot.caption = element_text(color = "grey"))
+          plot.caption = element_text(color = "grey"),
+          axis.text.y = element_blank())
 
 }

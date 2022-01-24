@@ -2,10 +2,14 @@ Package: sep
 Title: Swiss Environmental Panel data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Colin",
+    c(person(given = "Colin",
            family = "Walder",
            role = c("aut", "cre"),
-           email = "colin.walder@ir.gess.ethz.ch")
+           email = "colin.walder@ir.gess.ethz.ch"),
+	person(given = "Janek",
+           family = "Bruker",
+           role = "ctb",
+           email = "jbruker@ethz.ch"))
 Description: Easier data wrangling with Swiss Environmental Panel data.
 License: MIT + file LICENSE
 Encoding: UTF-8

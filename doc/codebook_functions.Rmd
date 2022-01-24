@@ -2,7 +2,7 @@
 title: "Creating a codebook"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{codebook_functions}
+  %\VignetteIndexEntry{Creating a codebook}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,18 +10,60 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 4,
+  fig.height = 6, 
+  fig.width = 8
 )
-options(rmarkdown.html_vignette.check_title = FALSE)
+```
+
+```{r, eval=FALSE}
+devtools::install_github("bonschorno/sep")
 ```
 
 ```{r setup}
 library(sep)
+library(ggplot2)
+library(kableExtra)
+library(readxl)
 ```
 
-Here's the first codebook function:
+FYI: The datasets used here are not publicly accessible for data protection reasons. However, they can be requested [here](https://istp.ethz.ch/research/sep.html).
 
-```{r}
-#cbtab_multi()
+[obtaining metadata]
+
+[chunk settings]
+
+
+```{r, eval=FALSE}
+load("upanel_w5.RData")
+upanelmeta_raw = read_excel("upanel_w5_metadata.xlsx")
+upanelmeta = data.frame(t(upanelmeta_raw))
+```
+
+The codebook presents all metadata in a separate table for each variable. The function uses the Latex option of the kableExtra() package to create the table. Thus, having a Latex compiler installed is a pre-requisite to use the majority of the codebook functions (all except `cb_sumplot`). It is best practice to compile the codebook using Rmarkdown. 
+
+First, you need to provide information where to find the variable information (question type etc.), German value labels, English value labels and missing labels. Simple numeric vectors indexing the rows where to find them do the job. 
+
+```{r, eval=FALSE}
+meta = 1:13 
+codes_de = 14:15 
+codes_en = 16:17
+miscodes = 18:23
+```
+
+
+```{r, results='asis', eval=FALSE}
+cb_table(metadata = upanelmeta, num.var = 14)
+```
+
+```{r, results='asis', eval=FALSE}
+cb_sumtab(metadata = upanelmeta, response = w5, num.var = 14, type = "numeric")
+```
+
+```{r, results='asis', eval=FALSE}
+cb_sumplot(metadata = upanelmeta, response = w5, num.var = 14, stats = "count")
 ```
 

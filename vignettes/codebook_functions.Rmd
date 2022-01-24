@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, eval=FALSE}
-devtools::install_github("datalicieux/sep")
+devtools::install_github("bonschorno/sep")
 ```
 
 ```{r setup}
@@ -37,7 +37,7 @@ FYI: The datasets used here are not publicly accessible for data protection reas
 [chunk settings]
 
 
-```{r}
+```{r, eval=FALSE}
 load("upanel_w5.RData")
 upanelmeta_raw = read_excel("upanel_w5_metadata.xlsx")
 upanelmeta = data.frame(t(upanelmeta_raw))
@@ -47,7 +47,7 @@ The codebook presents all metadata in a separate table for each variable. The fu
 
 First, you need to provide information where to find the variable information (question type etc.), German value labels, English value labels and missing labels. Simple numeric vectors indexing the rows where to find them do the job. 
 
-```{r}
+```{r, eval=FALSE}
 meta = 1:13 
 codes_de = 14:15 
 codes_en = 16:17
@@ -55,15 +55,15 @@ miscodes = 18:23
 ```
 
 
-```{r, results='asis'}
+```{r, results='asis', eval=FALSE}
 cb_table(metadata = upanelmeta, num.var = 14)
 ```
 
-```{r, results='asis'}
+```{r, results='asis', eval=FALSE}
 cb_sumtab(metadata = upanelmeta, response = w5, num.var = 14, type = "numeric")
 ```
 
-```{r, results='asis'}
+```{r, results='asis', eval=FALSE}
 cb_sumplot(metadata = upanelmeta, response = w5, num.var = 14, stats = "count")
 ```
 

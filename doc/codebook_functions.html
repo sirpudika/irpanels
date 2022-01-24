@@ -333,9 +333,26 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sep)</span></code></pre></div>
-<p>Here’s the first codebook function:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cbtab_multi()</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;bonschorno/sep&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sep)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
+<p>FYI: The datasets used here are not publicly accessible for data protection reasons. However, they can be requested <a href="https://istp.ethz.ch/research/sep.html">here</a>.</p>
+<p>[obtaining metadata]</p>
+<p>[chunk settings]</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;upanel_w5.RData&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>upanelmeta_raw <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="st">&quot;upanel_w5_metadata.xlsx&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>upanelmeta <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(upanelmeta_raw))</span></code></pre></div>
+<p>The codebook presents all metadata in a separate table for each variable. The function uses the Latex option of the kableExtra() package to create the table. Thus, having a Latex compiler installed is a pre-requisite to use the majority of the codebook functions (all except <code>cb_sumplot</code>). It is best practice to compile the codebook using Rmarkdown.</p>
+<p>First, you need to provide information where to find the variable information (question type etc.), German value labels, English value labels and missing labels. Simple numeric vectors indexing the rows where to find them do the job.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">13</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>codes_de <span class="ot">=</span> <span class="dv">14</span><span class="sc">:</span><span class="dv">15</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>codes_en <span class="ot">=</span> <span class="dv">16</span><span class="sc">:</span><span class="dv">17</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>miscodes <span class="ot">=</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">23</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cb_table</span>(<span class="at">metadata =</span> upanelmeta, <span class="at">num.var =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cb_sumtab</span>(<span class="at">metadata =</span> upanelmeta, <span class="at">response =</span> w5, <span class="at">num.var =</span> <span class="dv">14</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cb_sumplot</span>(<span class="at">metadata =</span> upanelmeta, <span class="at">response =</span> w5, <span class="at">num.var =</span> <span class="dv">14</span>, <span class="at">stats =</span> <span class="st">&quot;count&quot;</span>)</span></code></pre></div>
 
 
 

@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-For the time being, `sep` remains a private project, which is why it can only be installed via the following Github repository. 
+`sep` can be downloaded as follows:
 
 ```{r, eval=FALSE}
 devtools::install_github("bonschorno/sep")
@@ -37,6 +37,7 @@ Currently, `sep` offers the following functions:
 ls("package:sep")
 ```
 
+The prefixes indicate the step in the workflow. The functions beginning with `cb` simplify creating the codebook. The `eda` functions are for exploratory data analysis. The functions starting with `plot`, in turn, help to visualise the data. Finally, there are some additional helper functions.
 
 FYI: The dataset used here is not publicly accessible for data protection reasons. However, it can be requested [here](https://istp.ethz.ch/research/sep.html).
 
@@ -44,14 +45,14 @@ FYI: The dataset used here is not publicly accessible for data protection reason
 load("upanel_w5.RData")
 ```
 
-We almost always need to know the relative frequencies of the responses to a survey item. `eda_freqtable` helps to get these numbers quickly. By default, the logical operator is `rm.dk = FALSE`, i.e. the relative proportion of "Don't know" responses is included.
+Very often we need to know the relative frequencies of the responses to a survey item. `eda_freqtable` helps to get these numbers quickly. By default, the logical operator is `rm.dk = FALSE`, i.e. the relative proportion of "Don't know" responses is included.
 
 ```{r}
 eda_freqtable(w5, item = w5_q27)
 eda_freqtable(w5, item = w5_q27, rm.dk = T)
 ```
 
-To calculate the relative frequencies based on two variables, you can use `eda_crosstable`. The two variables must be specified as characters in a vector. Here, too, "Don't knows" can be included/excluded via a logical operator.
+To calculate the relative frequencies based on two variables, you can use `eda_crosstable`. The two variables must be specified as characters in a vector. Here, too, "Don't knows" can be included/excluded via the logical operator `rm.dk`.
 
 ```{r}
 eda_crosstable(w5, items = c("w5_q2", "w5_q11"))
@@ -66,33 +67,29 @@ In their simplest forms, `plot_bar_v` and `plot_bar_h` plot the relative frequen
 
 ```{r}
 plot_bar_v(w5, item = w5_q11)
-plot_bar_h(w5, item = w5_q11)
 ```
  
-For the share of "Don't know" responses there is a corresponding argument in the function (`dk_share`). For the labels, you can make use of the underlying `ggplot2` structure of the functions by simply adding further layers. With further optional arguments, the colour of the bars or the position of the relative frequencies can be changed, among other things.
+There is a corresponding argument in the function for the share of "Don't know" responses (`dk_share`). For the labels, you can use the underlying `ggplot2` structure of the functions by simply adding further layers (in this case, `scale_x_discrete` to add labels). **NB: When using the horizontal bar plots (with one or two variables), you have to reverse the order of your manual labels to display them correctly!!** With further optional arguments, the bars' colour or the relative frequencies' position can be changed, among other things.
 
 ```{r}
 plot_bar_h(w5, item = w5_q11) +
-    scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
+    scale_x_discrete(labels = rev(c("Item One", "Item Two", "Item Three", "Item Four", "Item Five")))
 ```
 
-The functions for the grouped visualisations are identical with the exception that a grouping variable (argument `grouper`) must be specified.
+Before moving on to the visualisations of grouped variables, it's worth highlighting the helper function `sep_palette". This function allows users to choose from a range of official ETH colour palettes. Available are the following palettes:
+
+`"Standard", "Darkblues", "Greens", "Lightblues", "Lightgreens", "Pinks"`
+
+You can select the palette of your choice by either saving it as an object or directly calling it in the plot function.
 
 ```{r}
-eda_freqtable(w5, item = w5_q11)
-plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
-  scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
+plot_groupbar_v(w5, item = w5_q11, by = w5_q2, labels = c("Female", "Male"), values = sep_palette("Standard")) +
+ scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
 
-Two points need to be added here, which are currently insufficiently clear from the documentation of the functions. First, it is possible to use further arguments of `scale_x_discrete` within the functions. This means that the labels of the legend can be changed directly via `labels.` Furthermore, there is currently no possibility to specify the colours of the bars for the grouped visualisations. For the moment, you have to adjust this as follows.
+**Again, note that with the horizontal plots, you have to change reverse the order of the manual labels to display them correctly!**
 
 ```{r}
-options(ggplot2.discrete.fill= c("#59C3C3", "#52489C"))
+plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Female", "Male"), values = sep_palette("Darkblues")) +
+ scale_x_discrete(labels = rev(c("Item One", "Item Two", "Item Three", "Item Four", "Item Five")))
 ```
-
-```{r}
-plot_groupbar_h(w5, item = w5_q11, by = w5_q2, labels = c("Male", "Female")) +
-  scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
-```
-
-

@@ -6,7 +6,9 @@
 #' @param barpadding optional argument to adjust padding between bars
 #' @param barwidth optional argument to define the bar's width
 #' @param legendtitle optional argument to define a legend title
-#' @param ... further arguments of \code{scale_fill_discrete} like \code{labels}
+#' @param textsize optional argument to adjust the text's size
+#' @param min_textsize optional argument to set the minimum text size
+#' @param ... further arguments of \code{scale_fill_manual} like \code{labels}
 #'
 #' @return a grouped vertical barplot
 #' @export
@@ -15,7 +17,7 @@
 #' @import ggplot2
 #' @import ggfittext
 #'
-plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", ...){
+plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, legendtitle = "", textsize = 8, min_textsize = 5, ...){
   data %>%
     filter({{item}} > -8,
            {{by}} > -8) %>%
@@ -25,7 +27,13 @@ plot_groupbar_v <- function(data, item, by, barpadding = 0.1, barwidth = 0.5, le
     mutate(freq = n/sum(n)) %>%
     ggplot(aes(x = as.factor({{item}}), y = .data$freq, fill = as.factor({{by}}), label = helper_percentage(.data$freq, 1))) +
     geom_col(position = position_dodge2(padding = barpadding)) +
-    geom_bar_text(family = "Roboto", position = "dodge", fullheight = TRUE, color = "white", contrast = TRUE) +
+    geom_bar_text(size = textsize,
+                  min.size = min_textsize,
+                  family = "Roboto",
+                  position = "dodge",
+                  fullheight = TRUE,
+                  color = "white",
+                  contrast = TRUE) +
     scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
     scale_fill_manual(...) +
     labs(title = "",

@@ -6,6 +6,8 @@
 #' @param barwidth optional argument to define the width of the bar
 #' @param texthjust optional argument to adjust the text's horizontal alignment
 #' @param textsize optional argument to adjust the text's size
+#' @param min_textsize optional argument to set the minimum text size
+#'
 #'
 #' @return a horizontal barplot
 #' @export
@@ -15,7 +17,7 @@
 #' @import forcats
 #' @import ggfittext
 #'
-plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = 2, textsize = 3.5){
+plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = 2, textsize = 8, min_textsize = 5){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%
@@ -24,7 +26,11 @@ plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthju
     mutate(freq = n/sum(n)) %>%
     ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq, label = helper_percentage(.data$freq, 1))) +
     geom_col(fill = barcolor, width = barwidth) +
-    geom_bar_text(min.size = textsize, family = "Roboto", padding.x = grid::unit(texthjust, "mm"), outside = TRUE) +
+    geom_bar_text(size = textsize,
+                  min.size = min_textsize,
+                  family = "Roboto",
+                  padding.x = grid::unit(texthjust, "mm"),
+                  outside = TRUE) +
     labs(title = "",
          subtitle = "",
          caption = n_par(data, {{item}})) +

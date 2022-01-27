@@ -66,7 +66,7 @@ Four plot functions are currently available: `plot_bar_v`, `plot_bar_h`, `plot_g
 In their simplest forms, `plot_bar_v` and `plot_bar_h` plot the relative frequency of the item in a vertical and horizontal plot, respectively. The values of the items are not yet labelled and the proportion "Don't know" responses must also be specified.
 
 ```{r}
-plot_bar_v(w5, item = w5_q11)
+plot_bar_v(w5, item = w5_q11, textsize = 11)
 ```
  
 There is a corresponding argument in the function for the share of "Don't know" responses (`dk_share`). For the labels, you can use the underlying `ggplot2` structure of the functions by simply adding further layers (in this case, `scale_x_discrete` to add labels). **NB: When using the horizontal bar plots (with one or two variables), you have to reverse the order of your manual labels to display them correctly!!** With further optional arguments, the bars' colour or the relative frequencies' position can be changed, among other things.

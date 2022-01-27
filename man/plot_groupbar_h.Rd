@@ -4,7 +4,16 @@
 \alias{plot_groupbar_h}
 \title{Grouped horizontal barplot}
 \usage{
-plot_groupbar_h(data, item, by, barpadding = 0.1, legendtitle = "", ...)
+plot_groupbar_h(
+  data,
+  item,
+  by,
+  barpadding = 0.1,
+  legendtitle = "",
+  textsize = 8,
+  min_textsize = 5,
+  ...
+)
 }
 \arguments{
 \item{data}{a \code{data.frame} object}
@@ -17,7 +26,11 @@ plot_groupbar_h(data, item, by, barpadding = 0.1, legendtitle = "", ...)
 
 \item{legendtitle}{optional argument to define a legend title}
 
-\item{...}{further arguments of \code{scale_fill_discrete} like \code{labels}}
+\item{textsize}{optional argument to adjust the text's size}
+
+\item{min_textsize}{optional argument to set the minimum text size}
+
+\item{...}{further arguments of \code{scale_fill_manual} like \code{labels}}
 }
 \value{
 a grouped horizontal barplot

@@ -11,6 +11,8 @@ plot_groupbar_v(
   barpadding = 0.1,
   barwidth = 0.5,
   legendtitle = "",
+  textsize = 8,
+  min_textsize = 5,
   ...
 )
 }
@@ -27,7 +29,11 @@ plot_groupbar_v(
 
 \item{legendtitle}{optional argument to define a legend title}
 
-\item{...}{further arguments of \code{scale_fill_discrete} like \code{labels}}
+\item{textsize}{optional argument to adjust the text's size}
+
+\item{min_textsize}{optional argument to set the minimum text size}
+
+\item{...}{further arguments of \code{scale_fill_manual} like \code{labels}}
 }
 \value{
 a grouped vertical barplot

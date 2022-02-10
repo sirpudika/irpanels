@@ -16,18 +16,31 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
   name = as.character(metadata[num.var, "Variable name"])
   variable = response[[name]]
 
+  if(na_sep == TRUE){
+    na = sum(variable < -9)}
+  else{
+    na = sum(is.na(variable))
+  }
+
+  na_text = paste0("Number of NA values: ", na)
+
   if(stats == "count"){
 
     if(na_sep == TRUE){
-      variable = ifelse(variable < -9, "NA", variable)}
+      variable = variable[variable >= -9]}
+    else{
+      variable = variable[!is.na(variable)]
+    }
 
     df = data.frame(variable = variable, color = NA)
 
-    df$fill = ifelse(df$variable == "NA", "light", "dark")
+    df$fill = ifelse(df$variable <= -8, "light", "dark")
 
-    df$variable = fct_relevel(as.factor(df$variable), "NA")
+    df$variable = as.factor(df$variable)
 
-    caption = paste0("Total number of respondents: ", length(variable))
+    n_plot_text = paste0("Number of plotted values: ", length(variable))
+
+    caption = paste(n_plot_text, na_text, sep = "\n")
 
     # Bar plot: value distribution
     barplot = ggplot(data = df) +
@@ -47,23 +60,25 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
   }else if(stats == "density"){
 
+    if(na_sep == TRUE){
+
     has_dk = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
     has_no = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
 
-    na = sum(variable < -9)
-    na_text = paste0("Number of NA values: ", na)
-
-    # Add if has_no ...
     if(has_dk == "yes"){
       dk = sum(variable == -8)
       dk_text = paste0("Number of Don't know values: ", dk)}
 
     if(has_no == "yes"){
       no = sum(variable == -9)
-      no_text = paste0("Number of None values: ", no)}
+      no_text = paste0("Number of None values: ", no)}}
+    else{}
 
     if(na_sep == TRUE){
       variable = variable[variable > -8]}
+    else{
+      variable = variable[!is.na(variable)]
+    }
 
     n_plot = length(variable)
     n_plot_text = paste0("Number of plotted values: ", n_plot)

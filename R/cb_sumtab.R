@@ -84,6 +84,8 @@ cb_sumtab = function(metadata, response, num.var, na_sep = TRUE, type){
     # Add NA count if NAs have numeric code (SEP coding)
     if(isTRUE(na_sep)){
       df$`NA's` = na}
+    else{
+      df$`NA's` = sum(is.na(variable))}
 
     # Print table
     facttab = df %>%

@@ -62,8 +62,14 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     if(na_sep == TRUE){
 
-    has_dk = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
-    has_no = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
+    has_dk = ifelse(!is.na(
+      metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
+    has_no = ifelse(!is.na(
+      metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")}
+
+    else{
+      has_dk = "no"
+      has_no = "no"}
 
     if(has_dk == "yes"){
       dk = sum(variable == -8)
@@ -71,14 +77,12 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     if(has_no == "yes"){
       no = sum(variable == -9)
-      no_text = paste0("Number of None values: ", no)}}
-    else{}
+      no_text = paste0("Number of None values: ", no)}
 
     if(na_sep == TRUE){
       variable = variable[variable > -8]}
     else{
-      variable = variable[!is.na(variable)]
-    }
+      variable = variable[!is.na(variable)]}
 
     n_plot = length(variable)
     n_plot_text = paste0("Number of plotted values: ", n_plot)

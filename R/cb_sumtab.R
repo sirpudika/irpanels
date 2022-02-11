@@ -16,23 +16,33 @@ cb_sumtab = function(metadata, response, num.var, na_sep = TRUE, type){
   name = as.character(metadata[num.var, "Variable name"])
   variable = response[[name]]
 
+  # Get NA count and remove NAs
+  if(isTRUE(na_sep)){
+    na = sum(variable < -9, na.rm = T)
+    variable = variable[variable >= -9]}
+
   if(type == "numeric"){
 
-    has_dk = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
-    has_no = ifelse(!is.na(metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
+    if(na_sep == TRUE){
+
+    has_dk = ifelse(!is.na(
+      metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
+    has_no = ifelse(!is.na(
+      metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")}
+
+    else{
+      has_dk = "no"
+      has_no = "no"}
 
     # Get DK count if relevant for variable (SEP Coding)
     if(has_dk == "yes"){
-      dk = sum(variable == -8, na.rm = T)}
+      dk = sum(variable == -8, na.rm = T)
+      variable = variable[variable != -8]}
 
     # Get None count if relevant for variable (SEP Coding)
     if(has_no == "yes"){
-      no = sum(variable == -9, na.rm = T)}
-
-    # Get NA count and remove NAs if NAs have numeric code (SEP coding)
-    if(isTRUE(na_sep)){
-      na = sum(variable < -9, na.rm = T)
-      variable = variable[variable > -8]}
+      no = sum(variable == -9, na.rm = T)
+      variable = variable[variable != -9]}
 
     # Get summary statistic
     values = summary(variable)
@@ -62,11 +72,6 @@ cb_sumtab = function(metadata, response, num.var, na_sep = TRUE, type){
     print(numtab)
 
   }else if(type == "factor"){
-
-    # Get NA count and remove NAs if NAs have numeric code (SEP coding)
-    if(isTRUE(na_sep)){
-      na = sum(variable < -9, na.rm = T)
-      variable = variable[variable > -10]}
 
     # Get summary statistic
     values = table(variable)

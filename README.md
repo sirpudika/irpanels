@@ -9,4 +9,4 @@ The Swiss Environmental Panel is based on a random sample of the Swiss populatio
 
 `sep` helps collaborators to automate the data analysis, the visualisations for the survey reports, and the codebook compliation. For the exploratory data analysis, the `eda_*` functions contain the most common operations. The `plot_*` functions, on the other hand, simplify visualisations once the data has been cleaned. Finally, the `cb_*` functions help to partially automate the creation of our codebooks.
 
-To help you get started, we created a vignette for both the [visualization](https://bonschorno.github.io/sep/doc/Walk-through.html) and the [codebook](https://bonschorno.github.io/sep/doc/codebook_functions.html) functions.
+To help you get started, we created a vignette for the [visualization](https://bonschorno.github.io/sep/doc/Walk-through.html) and the [codebook](https://bonschorno.github.io/sep/doc/codebook_walkthrough.pdf) functions.

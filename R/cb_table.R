@@ -57,7 +57,7 @@ cb_table <-
                   c(length(.meta)+c(length(values)/2)),
                   latex_gap_space = lbl.space) %>%
         ##group value labels (secondary language)
-        kableExtra::pack_rows(paste("Value Labels ", languages[1]),c(length(.meta)+c(length(values)/2)+1),
+        kableExtra::pack_rows(paste("Value Labels (", languages[2], ")"),c(length(.meta)+c(length(values)/2)+1),
                   c(length(.meta)+length(values)),
                   latex_gap_space = lblen.space) %>%
         ##group . missing labels

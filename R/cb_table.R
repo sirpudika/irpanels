@@ -19,7 +19,7 @@
 #'
 cb_table <-
   function(metadata, num.var,
-           .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes, languages = languages,
+           .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes, .languages = languages,
            lbl.space = "1em", lblen.space = "1em", mis.space = "1em", escape = TRUE){
 
     values = c(.codes_de[!is.na(metadata[num.var, .codes_de])],
@@ -57,7 +57,7 @@ cb_table <-
                   c(length(.meta)+c(length(values)/2)),
                   latex_gap_space = lbl.space) %>%
         ##group value labels (secondary language)
-        kableExtra::pack_rows(paste0("Value Labels (", languages[2], ")"),c(length(.meta)+c(length(values)/2)+1),
+        kableExtra::pack_rows(paste0("Value Labels (", .languages[2], ")"),c(length(.meta)+c(length(values)/2)+1),
                   c(length(.meta)+length(values)),
                   latex_gap_space = lblen.space) %>%
         ##group . missing labels

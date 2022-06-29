@@ -10,6 +10,7 @@
 #' @param lblen.space optional argument to adjust table space between German value labels and English value labels (defaults to 1em)
 #' @param mis.space optional argument to adjust table space between English value labels and missing labels (defaults to 1em)
 #' @param escape optional argument to escape special characters when producing HTML or LaTeX tables. True is save mode (defaults to TRUE)
+#' @param languages optional argument to set the labels of the primary and secondary language (defaults to c("DE", "EN"))
 #'
 #' @return codebook table in Latex format
 #' @export
@@ -19,7 +20,7 @@
 cb_table <-
   function(metadata, num.var,
            .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes,
-           lbl.space = "1em", lblen.space = "1em", mis.space = "1em", escape = TRUE){
+           lbl.space = "1em", lblen.space = "1em", mis.space = "1em", escape = TRUE, languages = c("DE", "EN")){
 
     values = c(.codes_de[!is.na(metadata[num.var, .codes_de])],
                .codes_en[!is.na(metadata[num.var, .codes_en])])
@@ -51,12 +52,12 @@ cb_table <-
       cbtable = df %>%
         ##define table format
         kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T, escape = escape) %>%
-        ##group value labels (German)
+        ##group value labels (primary language)
         kableExtra::pack_rows("Value Labels", length(.meta)+1,
                   c(length(.meta)+c(length(values)/2)),
                   latex_gap_space = lbl.space) %>%
-        ##group value labels (English)
-        kableExtra::pack_rows("Value Labels (EN)",c(length(.meta)+c(length(values)/2)+1),
+        ##group value labels (secondary language)
+        kableExtra::pack_rows(paste("Value Labels ", languages[1]),c(length(.meta)+c(length(values)/2)+1),
                   c(length(.meta)+length(values)),
                   latex_gap_space = lblen.space) %>%
         ##group . missing labels

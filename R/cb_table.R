@@ -6,11 +6,11 @@
 #' @param .codes_de numeric vector indexing rows of German value labels in metadata (defaults to codes_de)
 #' @param .codes_en numeric vector indexing rows of English value labels in metadata (defaults to codes_en)
 #' @param .miscodes numeric vector indexing rows of missing labels in metadata (defaults to miscodes)
+#' @param languages string vector of two elements to set the labels of the primary and secondary language, e.g. c("DE", "EN") for the SEP (defaults to languages)
 #' @param lbl.space optional argument to adjust table space between variable information and German value labels (defaults to 1em)
 #' @param lblen.space optional argument to adjust table space between German value labels and English value labels (defaults to 1em)
 #' @param mis.space optional argument to adjust table space between English value labels and missing labels (defaults to 1em)
 #' @param escape optional argument to escape special characters when producing HTML or LaTeX tables. True is save mode (defaults to TRUE)
-#' @param languages optional argument to set the labels of the primary and secondary language (defaults to c("DE", "EN"))
 #'
 #' @return codebook table in Latex format
 #' @export
@@ -19,8 +19,8 @@
 #'
 cb_table <-
   function(metadata, num.var,
-           .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes,
-           lbl.space = "1em", lblen.space = "1em", mis.space = "1em", escape = TRUE, languages = c("DE", "EN")){
+           .meta = meta, .codes_de = codes_de, .codes_en = codes_en, .miscodes = miscodes, languages = languages,
+           lbl.space = "1em", lblen.space = "1em", mis.space = "1em", escape = TRUE){
 
     values = c(.codes_de[!is.na(metadata[num.var, .codes_de])],
                .codes_en[!is.na(metadata[num.var, .codes_en])])

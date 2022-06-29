@@ -1,4 +1,4 @@
-Package: sep
+Package: sep_smp
 Title: Swiss Environmental Panel data
 Version: 0.0.0.9000
 Authors@R: 
@@ -6,11 +6,15 @@ Authors@R:
            family = "Walder",
            role = c("aut", "cre"),
            email = "colin.walder@ir.gess.ethz.ch"),
-	person(given = "Janek",
+	  person(given = "Janek",
            family = "Bruker",
            role = "ctb",
-           email = "jbruker@ethz.ch"))
-Description: Easier data wrangling with Swiss Environmental Panel data.
+           email = "jbruker@ethz.ch"),
+    person(given = "Jan",
+           family = "Linder",
+           role = "ctb",
+           email = "jlinder@ethz.ch"))
+Description: Easier data wrangling with Swiss Environmental Panel and Swiss Mobility Panel data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -28,4 +32,6 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr,
+    rmarkdown

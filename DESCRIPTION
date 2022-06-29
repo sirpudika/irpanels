@@ -1,5 +1,5 @@
-Package: sep_smp
-Title: Swiss Environmental Panel data
+Package: irpanels
+Title: Swiss Environmental Panel & Swiss Mobility Panel
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Colin",

@@ -34,7 +34,7 @@ cb_table <-
 
       cbtable = df %>%
         ##define table format
-        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T, escape = escape) %>%
+        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
         ##group missing labels
         kableExtra::pack_rows("Missing Labels", length(.meta)+1,
                   c(length(.meta)+length(.miscodes)),

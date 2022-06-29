@@ -34,7 +34,7 @@ cb_table <-
 
       cbtable = df %>%
         ##define table format
-        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
+        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T, escape = escape) %>%
         ##group missing labels
         kableExtra::pack_rows("Missing Labels", length(.meta)+1,
                   c(length(.meta)+length(.miscodes)),
@@ -50,7 +50,7 @@ cb_table <-
 
       cbtable = df %>%
         ##define table format
-        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T) %>%
+        kableExtra::kable("latex", col.names = NULL, booktabs = T, longtable = T, escape = escape) %>%
         ##group value labels (German)
         kableExtra::pack_rows("Value Labels", length(.meta)+1,
                   c(length(.meta)+c(length(values)/2)),

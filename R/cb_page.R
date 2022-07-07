@@ -23,3 +23,4 @@ cb_page <-
     cat("\n")
     cat("\\newpage")
   }
+

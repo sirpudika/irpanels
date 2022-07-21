@@ -4,7 +4,7 @@
 #' @param response a \code{data.frame} object with survey response data
 #' @param num.var single numeric value indexing column of variable in metadata
 #' @param na_sep a boolean indicating use of SEP coding rules (defaults to TRUE)
-#' @param stats a character indicating plotted statistic (count, density)
+#' @param stats a string indicating the type of plotted statistic (count, density)
 #'
 #' @return plot with counts or density of responses
 #' @export
@@ -16,19 +16,19 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
   name = as.character(metadata[num.var, "Variable name"])
   variable = response[[name]]
 
-  if(na_sep == TRUE){
-    na = sum(variable < -9)}
-  else{
+  if(na_sep == TRUE) {
+    na = sum(variable < -9)
+  } else {
     na = sum(is.na(variable))
   }
 
   na_text = paste0("Number of NA values: ", na)
 
-  if(stats == "count"){
+  if(stats == "count") {
 
-    if(na_sep == TRUE){
-      variable = variable[variable >= -9]}
-    else{
+    if(na_sep == TRUE) {
+      variable = variable[variable >= -9]
+    } else {
       variable = variable[!is.na(variable)]
     }
 
@@ -58,31 +58,33 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     print(barplot)
 
-  }else if(stats == "density"){
+  } else if(stats == "density") {
 
-    if(na_sep == TRUE){
-
-    has_dk = ifelse(!is.na(
-      metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
-    has_no = ifelse(!is.na(
-      metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")}
-
-    else{
+    if(na_sep == TRUE) {
+      has_dk = ifelse(!is.na(
+        metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
+      has_no = ifelse(!is.na(
+        metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
+    } else {
       has_dk = "no"
-      has_no = "no"}
+      has_no = "no"
+    }
 
-    if(has_dk == "yes"){
+    if(has_dk == "yes") {
       dk = sum(variable == -8)
-      dk_text = paste0("Number of Don't know values: ", dk)}
+      dk_text = paste0("Number of Don't know values: ", dk)
+    }
 
-    if(has_no == "yes"){
+    if(has_no == "yes") {
       no = sum(variable == -9)
-      no_text = paste0("Number of None values: ", no)}
+      no_text = paste0("Number of None values: ", no)
+    }
 
-    if(na_sep == TRUE){
-      variable = variable[variable > -8]}
-    else{
-      variable = variable[!is.na(variable)]}
+    if(na_sep == TRUE) {
+      variable = variable[variable > -8]
+    } else {
+      variable = variable[!is.na(variable)]
+    }
 
     n_plot = length(variable)
     n_plot_text = paste0("Number of plotted values: ", n_plot)
@@ -92,16 +94,16 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     df = data.frame(variable = variable, mean = mean, median = median)
 
-    if(has_dk == "yes" & has_no == "yes"){
+    if(has_dk == "yes" & has_no == "yes") {
       caption = paste(n_plot_text, dk_text, no_text, na_text, sep = "\n")}
 
-    if(has_dk == "yes" & has_no == "no"){
+    if(has_dk == "yes" & has_no == "no") {
       caption = paste(n_plot_text, dk_text, na_text, sep = "\n")}
 
-    if(has_dk == "no" & has_no == "yes"){
+    if(has_dk == "no" & has_no == "yes") {
       caption = paste(n_plot_text, no_text, na_text, sep = "\n")}
 
-    if(has_dk == "no" & has_no == "no"){
+    if(has_dk == "no" & has_no == "no") {
       caption = paste(n_plot_text, na_text, sep = "\n")}
 
     denseplot = ggplot(data = df) +
@@ -122,5 +124,7 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     print(denseplot)
 
+  } else {
+    stop("No valid argument for 'stats' (needs to be either 'count' or 'density')")
   }
 }

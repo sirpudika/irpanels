@@ -60,27 +60,25 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
   } else if(stats == "density") {
 
-    if(na_sep == TRUE) {
-      has_dk = ifelse(!is.na(
-        metadata[metadata[, "Variable name"] == name, "-8"]), "yes", "no")
-      has_no = ifelse(!is.na(
-        metadata[metadata[, "Variable name"] == name, "-9"]), "yes", "no")
+    if(na_sep) {
+      has_dk = "-8" %in% colnames(metadata) && !is.na(metadata[metadata[, "Variable name"] == name, "-8"])
+      has_no = "-9" %in% colnames(metadata) && !is.na(metadata[metadata[, "Variable name"] == name, "-9"])
     } else {
-      has_dk = "no"
-      has_no = "no"
+      has_dk = FALSE
+      has_no = FALSE
     }
 
-    if(has_dk == "yes") {
+    if(has_dk) {
       dk = sum(variable == -8)
       dk_text = paste0("Number of Don't know values: ", dk)
     }
 
-    if(has_no == "yes") {
+    if(has_no) {
       no = sum(variable == -9)
       no_text = paste0("Number of None values: ", no)
     }
 
-    if(na_sep == TRUE) {
+    if(na_sep) {
       variable = variable[variable > -8]
     } else {
       variable = variable[!is.na(variable)]
@@ -94,16 +92,16 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
     df = data.frame(variable = variable, mean = mean, median = median)
 
-    if(has_dk == "yes" & has_no == "yes") {
+    if(has_dk && has_no) {
       caption = paste(n_plot_text, dk_text, no_text, na_text, sep = "\n")}
 
-    if(has_dk == "yes" & has_no == "no") {
+    if(has_dk && !has_no) {
       caption = paste(n_plot_text, dk_text, na_text, sep = "\n")}
 
-    if(has_dk == "no" & has_no == "yes") {
+    if(!has_dk && has_no) {
       caption = paste(n_plot_text, no_text, na_text, sep = "\n")}
 
-    if(has_dk == "no" & has_no == "no") {
+    if(!has_dk && !has_no) {
       caption = paste(n_plot_text, na_text, sep = "\n")}
 
     denseplot = ggplot(data = df) +

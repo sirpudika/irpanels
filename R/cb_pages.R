@@ -32,8 +32,7 @@ cb_pages <-
         cb_sumplot(metadata, response, var, stats = stats)
       }
 
-      cat("\n")
-
       cat("\\newpage")
+      cat("\n")
     }
   }

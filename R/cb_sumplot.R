@@ -87,8 +87,8 @@ cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
     n_plot = length(variable)
     n_plot_text = paste0("Number of plotted values: ", n_plot)
 
-    mean = mean(variable)
-    median = median(variable)
+    mean = mean(variable, na.rm = TRUE)
+    median = median(variable, na.rm = TRUE)
 
     df = data.frame(variable = variable, mean = mean, median = median)
 

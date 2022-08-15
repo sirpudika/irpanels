@@ -17,7 +17,7 @@
 cb_pages <-
   function(metadata, multi.vars,
            comment = "", lbl.space = "1em", lblen.space = "1em", mis.space = "1em", escape = TRUE,
-           add_sumplots = FALSE, response = NULL, stats = ""){
+           add_sumplots = FALSE, response = NULL, stats = "") {
 
     for(var in multi.vars){
 
@@ -32,5 +32,8 @@ cb_pages <-
         cb_sumplot(metadata, response, var, stats = stats)
       }
 
+      cat("\n")
+
       cat("\\newpage")
-    }}
+    }
+  }

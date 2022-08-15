@@ -47,7 +47,9 @@ cb_sumplot_mcq = function(metadata, response, multi.vars, na_sep = TRUE){
     geom_bar(stat = "identity", alpha = 0.6) +
     scale_fill_manual(values = c("#404040", "#C0C0C0")) +
     labs(y = "N respondents",
-         caption = caption) +
+         caption = caption,
+         title = "Summary Plot for Multiple Choice Question",
+         subtitle = "See description of the different options on the following pages") +
     theme_minimal() +
     theme(legend.position = "none",
           panel.grid.major = element_blank(),
@@ -57,4 +59,6 @@ cb_sumplot_mcq = function(metadata, response, multi.vars, na_sep = TRUE){
           plot.caption.position = "plot")
 
   print(barplot)
+
+  cat("\\newpage")
 }

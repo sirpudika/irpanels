@@ -20,6 +20,7 @@ cb_sumplot_mcq = function(metadata, response, multi.vars, na_sep = TRUE){
   for(i in multi.vars) {
     if(as.character(metadata[i, "Question type"]) == "Multiple Choice") {
       name = as.character(metadata[i, "Variable name"])
+      name = gsub("\\\\", "", name) # for the case that escape == F, remove backslashes
       names = append(names, name)
       variables[[name]] = list(response[[name]])
       sums[[name]] = sum(response[[name]], na.rm = T) # count the number of 1 responses

@@ -14,6 +14,7 @@
 cb_sumplot = function(metadata, response, num.var, na_sep = TRUE, stats){
 
   name = as.character(metadata[num.var, "Variable name"])
+  name = gsub("\\\\", "", name) # for the case that escape == F, remove backslashes
   variable = response[[name]]
 
   if(na_sep == TRUE) {

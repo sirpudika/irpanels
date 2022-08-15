@@ -37,5 +37,6 @@ cb_page <-
 
     cat("\\newpage")
     cat("\n")
+    cat("\n")
   }
 

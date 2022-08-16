@@ -61,5 +61,6 @@ cb_sumplot_mcq = function(metadata, response, multi.vars, na_sep = TRUE){
 
   print(barplot)
 
-  cat("\\newpage")
+  cat("\n")
+  cat("\n")
 }

@@ -20,14 +20,15 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, eval=FALSE}
-devtools::install_github("bonschorno/sep")
+devtools::install_github("sirpudika/irpanels")
 ```
 
 ```{r setup}
-library(sep)
-library(ggplot2)
+library(irpanels)
+library(haven)
 library(kableExtra)
 library(readxl)
+library(tidyverse)
 ```
 
 FYI: The datasets used here are not publicly accessible for data protection reasons. However, they can be requested [here](https://istp.ethz.ch/research/sep.html).

@@ -1,8 +1,8 @@
 ---
-title: "Walking you through sep"
+title: "Walking you through irpanels"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Walking you through sep}
+  %\VignetteIndexEntry{Walking you through irpanels}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,22 +19,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-`sep` can be downloaded as follows:
+`irpanels` can be downloaded as follows:
 
 ```{r, eval=FALSE}
-devtools::install_github("bonschorno/sep")
+devtools::install_github("sirpudika/irpanels")
 ```
 
 ```{r setup}
-library(sep)
+library(irpanels)
 library(dplyr)
 library(ggplot2)
+library(haven)
 ```
 
-Currently, `sep` offers the following functions:
+Currently, `irpanels` offers the following functions:
 
 ```{r, echo=FALSE}
-ls("package:sep")
+ls("package:irpanels")
 ```
 
 The prefixes indicate the step in the workflow. The functions beginning with `cb` simplify creating the codebook. The `eda` functions are for exploratory data analysis. The functions starting with `plot`, in turn, help to visualise the data. Finally, there are some additional helper functions.

@@ -2,6 +2,7 @@
 #'
 #' @param data a \code{data.frame} object
 #' @param item a survey item
+#' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param barcolor optional argument to set the color of the bar
 #' @param barwidth optional argument to define the width of the bar
 #' @param texthjust optional argument to adjust the text's horizontal alignment
@@ -17,7 +18,7 @@
 #' @import forcats
 #' @import ggfittext
 #'
-plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthjust = 2, textsize = 8, min_textsize = 5){
+plot_bar_h <- function(data, item, lang = "DE", barcolor = "#1F407A", barwidth = 0.8, texthjust = 2, textsize = 8, min_textsize = 5){
   data %>%
     filter({{item}} > -8) %>%
     group_by({{item}}) %>%
@@ -33,7 +34,7 @@ plot_bar_h <- function(data, item, barcolor = "#1F407A", barwidth = 0.8, texthju
                   outside = TRUE) +
     labs(title = "",
          subtitle = "",
-         caption = n_par(data, {{item}})) +
+         caption = n_par(data, {{item}}, lang = lang)) +
     coord_flip(clip = "off") +
     theme_sep() +
     theme(axis.text.x = element_blank(),

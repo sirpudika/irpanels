@@ -3,6 +3,7 @@
 #' @param data a \code{data.frame} object
 #' @param item a survey item
 #' @param by grouping variable
+#' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param barpadding optional argument to adjust padding between bars
 #' @param legendtitle optional argument to define a legend title
 #' @param textsize optional argument to adjust the text's size
@@ -18,7 +19,7 @@
 #' @import ggfittext
 
 #'
-plot_groupbar_h <- function(data, item, by, barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
+plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
 
   data %>%
     filter({{item}} > -8,
@@ -42,7 +43,7 @@ plot_groupbar_h <- function(data, item, by, barpadding = 0.1, legendtitle = "", 
     labs(title = "",
          subtitle = "",
          fill = legendtitle,
-         caption = n_par(data, {{item}})) +
+         caption = n_par(data, {{item}}, lang = lang)) +
     guides(fill = guide_legend(reverse=TRUE)) +
     theme_sep() +
     theme(panel.grid.major.y = element_blank(),

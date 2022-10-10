@@ -21,7 +21,7 @@ plot_multiple_h(
 \arguments{
 \item{data}{a \code{data.frame} object}
 
-\item{item}{a survey item}
+\item{item}{a vector listing the survey items}
 
 \item{by}{optional argument for distinction by subgroup}
 

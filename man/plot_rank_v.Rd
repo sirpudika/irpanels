@@ -22,7 +22,7 @@ plot_rank_v(
 \arguments{
 \item{data}{a \code{data.frame} object}
 
-\item{item}{a survey item}
+\item{item}{a vector lisiting the survey items}
 
 \item{by}{optional argument for distinction by subgroup}
 

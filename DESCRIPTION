@@ -13,7 +13,11 @@ Authors@R:
     person(given = "Jan",
            family = "Linder",
            role = "ctb",
-           email = "jlinder@ethz.ch"))
+           email = "jlinder@ethz.ch"),
+    person(given = "Patricia",
+           family = "Maissen",
+           role = "ctb",
+           email = "pmaissen@ethz.ch"))
 Description: Easier data wrangling with Swiss Environmental Panel and Swiss Mobility Panel data.
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -1,7 +1,7 @@
 #' Vertical barplot to rank items
 #'
 #' @param data a \code{data.frame} object
-#' @param item a survey item
+#' @param item a vector lisiting the survey items
 #' @param by optional argument for distinction by subgroup
 #' @param treat optional argument for distinction by treatment group
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")

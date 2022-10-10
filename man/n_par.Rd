@@ -4,12 +4,18 @@
 \alias{n_par}
 \title{Number of participants for survey item}
 \usage{
-n_par(data, item)
+n_par(data, item, by = NULL, treat = NULL, lang = "DE")
 }
 \arguments{
 \item{data}{a \code{data.frame} object}
 
 \item{item}{relevant survey item (i.e. w5_q17)}
+
+\item{by}{optional argument for distinction by subgroup}
+
+\item{treat}{optional argument for distinction by treatment group}
+
+\item{lang}{language (German = "DE" (default), English = "EN", anything else goes neutral)}
 }
 \value{
 number of participants ("Don't knows"-answers included) for item

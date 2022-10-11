@@ -21,13 +21,13 @@
 #'
 
 plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
-                        n.items = length(labs), ncol.wrap = 1,
+                        n.items = length(item_labels), ncol.wrap = 1,
                         textsize = 8, min_textsize = 5, percent_position = "center",
                         barwidth = 0.6, legend.pos = "right"){
   
   # error message if question or labels are not predefined
   environment <- ls(.GlobalEnv)
-  stopifnot("Labels ('labs') must be defined." = ("labs" %in% environment),
+  stopifnot("Labels ('item_labels') must be defined." = ("item_labels" %in% environment),
             "Question text ('question') must be defined." = ("question" %in% environment))
   
   # compute numbers
@@ -103,7 +103,7 @@ plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # give proper labels (item text)
   for(i in unique(plot$value)){ 
-    plot$value <- ifelse(plot$value == i, labs[i], plot$value)
+    plot$value <- ifelse(plot$value == i, item_labels[i], plot$value)
   }
   
   # set caption according to language

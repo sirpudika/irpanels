@@ -27,7 +27,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # error message if question or labels are not predefined
   environment <- ls(.GlobalEnv)
-  stopifnot("Labels ('labs') must be defined." = ("labs" %in% environment),
+  stopifnot("Labels ('item_labels') must be defined." = ("item_labels" %in% environment),
             "Question text ('question') must be defined." = ("question" %in% environment))
   
   # compute numbers
@@ -79,7 +79,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # give proper labels (item text)
   for(i in 1:length(item)){ 
-    plot$variable <- ifelse(plot$variable == item[i], labs[i], plot$variable)
+    plot$variable <- ifelse(plot$variable == item[i], item_labels[i], plot$variable)
   }
   
   # set caption according to language
@@ -93,7 +93,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                           sep = ""))
   
   # plot
-  p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(labs)),
+  p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(item_labels)),
                         fill = factor(value), label = percentage)) +
     geom_col(width = barwidth) +
     ggfittext::geom_bar_text(outside = FALSE,

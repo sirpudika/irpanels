@@ -10,7 +10,7 @@ plot_rank_v(
   by = NULL,
   treat = NULL,
   lang = "DE",
-  n.items = length(labs),
+  n.items = length(item_labels),
   ncol.wrap = 1,
   textsize = 8,
   min_textsize = 5,

@@ -32,7 +32,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # compute numbers
   if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
-    df <- data %>% 
+    plot <- data %>% 
       dplyr:: select(all_of(item)) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
       filter(value > 0) %>% 
@@ -43,7 +43,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
-    df <- data %>% 
+    plot <- data %>% 
       dplyr::select(all_of(item), treat = all_of(treat)) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0) %>% 
@@ -54,7 +54,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else if(is.null(treat) & !is.null(by)) { #item with subgroups
-    df <- data %>% 
+    plot <- data %>% 
       dplyr::select(all_of(item), by = all_of(by)) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
@@ -65,7 +65,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else { #item with both treatment and subgroups
-    df <- data %>% 
+    plot <- data %>% 
       dplyr::select(all_of(item), treat = all_of(treat), by = all_of(by)) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
@@ -79,7 +79,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # give proper labels (item text)
   for(i in 1:length(item)){ 
-    df$variable <- ifelse(df$variable == item[i], labs[i], df$variable)
+    plot$variable <- ifelse(plot$variable == item[i], labs[i], plot$variable)
   }
   
   # set caption according to language
@@ -93,7 +93,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                           sep = ""))
   
   # plot
-  p <- ggplot(df, aes(freq_rel, factor(variable, levels = rev(labs)),
+  p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(labs)),
                         fill = factor(value), label = percentage)) +
     geom_col(width = barwidth) +
     ggfittext::geom_bar_text(outside = FALSE,

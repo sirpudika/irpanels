@@ -16,8 +16,8 @@
 n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
   if(is.null(by) & is.null(treat)){
     count <- data %>% 
-      dplyr::select(all_of(item)) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(all_of(as.vector(item))) %>% 
+      pivot_longer(all_of(as.vector(item)), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       group_by(question) %>% 
@@ -26,8 +26,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   } else if(is.null(treat)){
     count <- data %>% 
-      dplyr::select(all_of(item), by = all_of(by)) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(all_of(as.vector(item)), by = all_of(as.vector(by))) %>% 
+      pivot_longer(all_of(as.vector(item)), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       pivot_longer(by,
@@ -39,8 +39,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   } else if(is.null(by)){
     count <- data %>% 
-      dplyr::select(all_of(item), treat = all_of(treat)) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(all_of(as.vector(item)), treat = all_of(as.vector(treat))) %>% 
+      pivot_longer(all_of(as.vector(item)), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       pivot_longer(treat,
@@ -52,8 +52,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   } else {
     count <- data %>% 
-      dplyr::select(all_of(item), by = all_of(by), treat = all_of(treat)) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(all_of(as.vector(item)), by = all_of(as.vector(by)), treat = all_of(as.vector(treat))) %>% 
+      pivot_longer(all_of(as.vector(item)), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       pivot_longer(treat,

@@ -34,7 +34,7 @@ plot_bar_h <- function(data, item, lang = "DE", barcolor = "#1F407A", barwidth =
                   outside = TRUE) +
     labs(title = "",
          subtitle = "",
-         caption = n_par(data, {{item}}, lang = lang)) +
+         caption = n_par(data, dQuote({{item}}), lang = lang)) +
     coord_flip(clip = "off") +
     theme_sep() +
     theme(axis.text.x = element_blank(),

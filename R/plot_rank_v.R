@@ -49,7 +49,7 @@ plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
     
   } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = all_of(treat)) %>% 
+      dplyr::select(all_of(item), treat = {{treat}}) %>% 
       tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0) %>% 
       group_by(treat, variable, value) %>% 
@@ -63,7 +63,7 @@ plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       filter(rank <= n.items)
   } else if(is.null(treat) & !is.null(by)) { #item with subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), by = all_of(by)) %>% 
+      dplyr::select(all_of(item), by = {{by}}) %>% 
       tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(by, variable, value) %>% 
@@ -77,7 +77,7 @@ plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       filter(rank <= n.items)
   } else { #item with both treatment and subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = all_of(treat), by = all_of(by)) %>% 
+      dplyr::select(all_of(item), treat = {{treat}}, by = {{by}}) %>% 
       tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(treat, by, variable, value) %>% 

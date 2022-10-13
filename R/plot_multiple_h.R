@@ -34,7 +34,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
     plot <- data %>% 
       dplyr:: select(all_of(item)) %>% 
-      pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
+      tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
       filter(value > 0) %>% 
       group_by(variable, value) %>% 
       count() %>% 
@@ -44,8 +44,8 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = all_of(treat)) %>% 
-      pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
+      dplyr::select(all_of(item), treat = all_of({{treat}})) %>% 
+      tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0) %>% 
       group_by(treat, variable, value) %>% 
       count() %>% 
@@ -55,8 +55,8 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else if(is.null(treat) & !is.null(by)) { #item with subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), by = all_of(by)) %>% 
-      pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
+      dplyr::select(all_of(item), by = all_of({{by}})) %>% 
+      tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(by, variable, value) %>% 
       count() %>% 
@@ -66,8 +66,8 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else { #item with both treatment and subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = all_of(treat), by = all_of(by)) %>% 
-      pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
+      dplyr::select(all_of(item), treat = all_of({{treat}}), by = all_of({{by}})) %>% 
+      tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(treat, by, variable, value) %>% 
       count() %>% 

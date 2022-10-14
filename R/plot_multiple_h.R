@@ -31,7 +31,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
             "Question text ('question') must be defined." = ("question" %in% environment))
   
   # compute numbers
-  if(is.null({{treat}}) & is.null({{by}})) { #item without treatment or subgroups
+  if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
     plot <- data %>% 
       dplyr:: select(all_of(item)) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
@@ -42,9 +42,9 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
-  } else if(!is.null({{treat}}) & is.null({{by}})) { #item with treatment groups
+  } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = {{treat}}) %>% 
+      dplyr::select(all_of(item), treat = treat) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0) %>% 
       group_by(treat, variable, value) %>% 
@@ -53,7 +53,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
-  } else if(is.null({{treat}}) & !is.null(by)) { #item with subgroups
+  } else if(is.null(treat) & !is.null(by)) { #item with subgroups
     plot <- data %>% 
       dplyr::select(all_of(item), by = by) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
@@ -66,7 +66,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else { #item with both treatment and subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = {{treat}}, by = {{by}}) %>% 
+      dplyr::select(all_of(item), treat = treat, by = by) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(treat, by, variable, value) %>% 

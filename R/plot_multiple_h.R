@@ -30,11 +30,6 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   stopifnot("Labels ('item_labels') must be defined." = ("item_labels" %in% environment),
             "Question text ('question') must be defined." = ("question" %in% environment))
   
-  # rename treatment and subgroup variables
-  data <- rename(data,
-                 treat = {{treat}},
-                 by = {{by}})
-  
   # compute numbers
   if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
     plot <- data %>% 
@@ -49,7 +44,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat) %>% 
+      dplyr::select(all_of(item), treat = {{treat}}) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > -1) %>% 
       group_by(treat, variable, value) %>% 
@@ -60,7 +55,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else if(is.null(treat) & !is.null(by)) { #item with subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), by) %>% 
+      dplyr::select(all_of(item), by = {{by}}) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > -1 & !is.na(by)) %>% 
       group_by(by, variable, value) %>% 
@@ -71,7 +66,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
              percentage = paste0(round(freq_rel*100, 1), "%"))
   } else { #item with both treatment and subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat, by) %>% 
+      dplyr::select(all_of(item), treat = {{treat}}, by = {{by}}) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > -1 & !is.na(by)) %>% 
       group_by(treat, by, variable, value) %>% 
@@ -89,13 +84,11 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # set caption according to language
   caption <- ifelse(lang == "DE", 
-                    paste("Fragetext: «", question, "»\n",
-                          n_par(data = data, item = item, by = by, treat = treat),
-                          sep = ""),
-                    paste("Question text: «", question, "»\n",
+                    paste0("Fragetext: «", question, "»\n",
+                          n_par(data = data, item = item, by = by, treat = treat)),
+                    paste0("Question text: «", question, "»\n",
                           n_par(data = data, item = item, by = by, treat = treat, 
-                                lang = "EN"),
-                          sep = ""))
+                                lang = "EN")))
   
   # plot
   p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(item_labels)),

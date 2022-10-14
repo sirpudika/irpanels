@@ -24,7 +24,7 @@
 plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                         n.items = length(item_labels), ncol.wrap = 1,
                         textsize = 8, min_textsize = 5, percent_position = "center",
-                        barwidth = 0.6, legend.pos = "right"){
+                        barwidth = 0.6, legend.pos = "right", ...){
   
   # error message if question or labels are not predefined
   environment <- ls(.GlobalEnv)
@@ -128,6 +128,7 @@ plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                              min.size = min_textsize) +
     labs(x = NULL, y = NULL, caption = caption) +
     irpanels::theme_sep() +
+    scale_fill_manual(...) +
     scale_y_continuous(labels = scales::percent) +
     theme(plot.caption = element_text(color = "grey"),
           plot.caption.position =  "plot",

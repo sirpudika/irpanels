@@ -18,6 +18,6 @@ Number of participants ("Don't knows"-answers included) for item
 }
 \description{
 Number of participants for survey item
-To be used with @backref plot_bar_h, @backref plot_bar_v, @backref plot_groupbar_h and @backref plot_groupbar_v.
-For @backref plot_multiple_h and @backref plot_rank_v, use the function @backref n_par_by.
+To be used with \code{plot_bar_h()}, \code{plot_bar_v()}, \code{plot_groupbar_h()} and \code{plot_groupbar_v()}.
+For \code{plot_multiple_h()} and  \code{plot_rank_v()}, use the function \code{n_par_by()}.
 }

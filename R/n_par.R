@@ -16,8 +16,8 @@
 n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
   
   # rename treatment and subgroup variables
-  data$by <- data[, {{by}}]
-  data$treat <- data[, {{treat}}]
+  data$by <- data[, quote(by)]
+  data$treat <- data[, quote(treat)]
   
   # count
   if(is.null(by) & is.null(treat)){ # without treatment or subgroup
@@ -45,8 +45,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   } else if(is.null(by)){ # with treatment group
     count <- data %>% 
-      dplyr::select(all_of(item), treat = treat) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(item, treat = treat) %>% 
+      pivot_longer(item, 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       pivot_longer(treat,
@@ -58,8 +58,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   } else { # with treatment and subgroup
     count <- data %>% 
-      dplyr::select(all_of(item), by = by, treat = treat) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(item, by = by, treat = treat) %>% 
+      pivot_longer(item, 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       pivot_longer(treat,
@@ -77,14 +77,14 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
   # print
   if(lang == "DE"){
     if(length(count) == 1 & length(item) == 1){paste("Grafik basiert auf N = ", count, sep = "")} 
-    else if(length(count) == 1 & is.null(by) & is.null(treat)){paste("Grafik basiert auf N = ", count, " (pro Unterfrage).", sep = "")}
-    else if(length(count) == 1){paste("Grafik basiert auf N = ", count, " (pro Unterfrage und Untergruppe).", sep = "")}
+    else if(length(count) == 1 & is.null(by) & is.null(treat)){paste("Grafik basiert auf N = ", count, " (pro Unterfrage)", sep = "")}
+    else if(length(count) == 1){paste("Grafik basiert auf N = ", count, " (pro Unterfrage und Untergruppe)", sep = "")}
     else if(is.null(by) & is.null(treat)){paste("Die Anzahl Befragter variiert je nach Unterfrage zwischen ", min(count), " und ", max(count), ".", sep = "")}
     else {paste("Die Anzahl Befragter variiert je nach Unterfrage und Untergruppe zwischen ", min(count), " und ", max(count), ".", sep = "")}
   } else if(lang == "EN"){
     if(length(count) == 1 & length(item) == 1){paste("Plot is based on N = ", count, sep = "")} 
-    else if(length(count) == 1 & is.null(by) & is.null(treat)){paste("Plot is based on N = ", count, " (per subitem).", sep = "")}
-    else if(length(count) == 1){paste("Plot is based on N = ", count, " (per subgroup and subitem).", sep = "")}
+    else if(length(count) == 1 & is.null(by) & is.null(treat)){paste("Plot is based on N = ", count, " (per subitem)", sep = "")}
+    else if(length(count) == 1){paste("Plot is based on N = ", count, " (per subgroup and subitem)", sep = "")}
     else if(is.null(by) & is.null(treat)){paste("The number of participants varies by subitem between ", min(count), " and ", max(count), ".", sep = "")}
     else {paste("The number of participants varies by subitem and subgroup between ", min(count), " and ", max(count), ".", sep = "")}
   } else {

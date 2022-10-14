@@ -2,8 +2,8 @@
 #' 
 #' @description 
 #' Number of participants for survey item
-#' To be used with @backref plot_bar_h, @backref plot_bar_v, @backref plot_groupbar_h and @backref plot_groupbar_v.
-#' For @backref plot_multiple_h and @backref plot_rank_v, use the function @backref n_par_by.
+#' To be used with `plot_bar_h()`, `plot_bar_v()`, `plot_groupbar_h()` and `plot_groupbar_v()`.
+#' For `plot_multiple_h()` and  `plot_rank_v()`, use the function `n_par_by()`.
 #'
 #' @param data a \code{data.frame} object
 #' @param item relevant survey item (i.e. w5_q17)

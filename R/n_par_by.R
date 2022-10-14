@@ -1,9 +1,9 @@
 #' Number of participants for survey item
 #' 
 #' @description 
-#' Number of participants for survey item
-#' To be used with @backref plot_multiple_h and @backref plot_rank_v.
-#' For @backref plot_bar_h, @backref plot_bar_v, @backref plot_groupbar_h and @backref plot_groupbar_v, use the function @backref n_par_by.
+#' Number of participants for survey item, distinguishable by subgroup and/or treatment group.
+#' To be used with `plot_multiple_h()` and  `plot_rank_v()`.
+#' For `plot_bar_h()`, `plot_bar_v()`, `plot_groupbar_h()` and `plot_groupbar_v()`, use the function `n_par()`.
 #'
 #'
 #' @param data a \code{data.frame} object

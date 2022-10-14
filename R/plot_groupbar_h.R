@@ -21,10 +21,9 @@
 #'
 plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
 
-  data[, "item"] <- data[, {{item}}]
-  data[, "by"] <- data[, {{by}}]
-  
   data %>%
+    mutate(item = {{item}},
+           by = {{by}}) %>%
     filter(item > -8,
            by > -8) %>%
     group_by(item, by) %>%

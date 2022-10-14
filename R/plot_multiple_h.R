@@ -34,8 +34,8 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
     plot <- data %>% 
       dplyr:: select(all_of(item)) %>% 
-      pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
-      filter(value > 0) %>% 
+      pivot_longer(everything(), names_to = "variable", values_to = "value") %>%
+      filter(value > -1) %>% 
       group_by(variable, value) %>% 
       count() %>% 
       group_by(variable) %>% 
@@ -46,7 +46,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
     plot <- data %>% 
       dplyr::select(all_of(item), treat = treat) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
-      filter(value > 0) %>% 
+      filter(value > -1) %>% 
       group_by(treat, variable, value) %>% 
       count() %>% 
       group_by(treat, variable) %>%
@@ -57,7 +57,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
     plot <- data %>% 
       dplyr::select(all_of(item), by = by) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
-      filter(value > 0 & !is.na(by)) %>% 
+      filter(value > -1 & !is.na(by)) %>% 
       group_by(by, variable, value) %>% 
       count() %>% 
       group_by(by, variable) %>%
@@ -68,7 +68,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
     plot <- data %>% 
       dplyr::select(all_of(item), treat = treat, by = by) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
-      filter(value > 0 & !is.na(by)) %>% 
+      filter(value > -1 & !is.na(by)) %>% 
       group_by(treat, by, variable, value) %>% 
       count() %>% 
       group_by(treat, by, variable) %>%

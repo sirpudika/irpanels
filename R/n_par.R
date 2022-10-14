@@ -18,7 +18,7 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
   # rename treatment and subgroup variables
  # data$by <- data[, quote(by)]
   #data$treat <- data[, quote(treat)]
-  if(length(quote(item)) == 1){data$item <- data[, quote(item)]}
+  if(length({{item}}) == 1){data$item <- data[, {{item}}]}
   
   # count
   if(is.null(by) & is.null(treat)){ # without treatment or subgroup

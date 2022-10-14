@@ -22,8 +22,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
   # count
   if(is.null(by) & is.null(treat)){ # without treatment or subgroup
     count <- data %>% 
-      dplyr::select(all_of(item)) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(item) %>% 
+      pivot_longer(item, 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       group_by(question) %>% 
@@ -32,8 +32,8 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   } else if(is.null(treat)){ # with subgroup
     count <- data %>% 
-      dplyr::select(all_of(item), by = by) %>% 
-      pivot_longer(all_of(item), 
+      dplyr::select(item, by = by) %>% 
+      pivot_longer(item, 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
       pivot_longer(by,

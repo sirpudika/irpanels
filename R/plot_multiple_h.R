@@ -85,10 +85,10 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   # set caption according to language
   caption <- ifelse(lang == "DE", 
                     paste0("Fragetext: «", question, "»\n",
-                          n_par(data = data, item = item, by = by, treat = treat)),
+                          n_par_by(data = data, item = item, by = by, treat = treat)),
                     paste0("Question text: «", question, "»\n",
-                          n_par(data = data, item = item, by = by, treat = treat, 
-                                lang = "EN")))
+                          n_par_by(data = data, item = item, by = by, treat = treat, 
+                                   lang = "EN")))
   
   # plot
   p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(item_labels)),

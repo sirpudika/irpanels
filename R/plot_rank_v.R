@@ -109,13 +109,11 @@ plot_rank_v <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   
   # set caption according to language
   caption <- ifelse(lang == "DE", 
-                    paste("Fragetext: «", question, "»\n",
-                          n_par(data = data, item = item, by = by, treat = treat),
-                          sep = ""),
-                    paste("Question text: «", question, "»\n",
-                          n_par(data = data, item = item, by = by, treat = treat, 
-                                lang = "EN"),
-                          sep = ""))
+                    paste0("Fragetext: «", question, "»\n",
+                           n_par_by(data = data, item = item, by = by, treat = treat)),
+                    paste0("Question text: «", question, "»\n",
+                           n_par_by(data = data, item = item, by = by, treat = treat, 
+                                    lang = "EN")))
   
   # plot
   p <- ggplot(plot, aes(factor(variable, levels = unique(variable)), freq_rel,

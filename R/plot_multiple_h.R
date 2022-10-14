@@ -23,7 +23,7 @@
 plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                             barwidth = 0.6, ncol.wrap = 1, 
                             textsize = 8, min_textsize = 5, percent_position = "center",
-                            legend.pos = "bottom"){
+                            legend.pos = "bottom", ...){
   
   # error message if question or labels are not predefined
   environment <- ls(.GlobalEnv)
@@ -101,6 +101,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                              place = percent_position,
                              size = textsize, 
                              min.size = min_textsize) +
+    scale_fill_manual(...) +
     scale_x_continuous(labels = scales::percent) +
     labs(x = NULL, y = NULL, caption = caption) +
     irpanels::theme_sep() +

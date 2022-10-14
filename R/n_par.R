@@ -14,7 +14,14 @@
 #'
 
 n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
-  if(is.null(by) & is.null(treat)){
+  
+  # rename treatment and subgroup variables
+  data <- rename(data,
+                 treat = {{treat}},
+                 by = {{by}})
+  
+  # count
+  if(is.null(by) & is.null(treat)){ # without treatment or subgroup
     count <- data %>% 
       dplyr::select(all_of(item)) %>% 
       pivot_longer(all_of(item), 
@@ -24,9 +31,9 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       count() %>% 
       pull(n) %>% 
       unique()
-  } else if(is.null(treat)){
+  } else if(is.null(treat)){ # with subgroup
     count <- data %>% 
-      dplyr::select(all_of(item), by = all_of(by)) %>% 
+      dplyr::select(all_of(item), by = by) %>% 
       pivot_longer(all_of(item), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
@@ -37,9 +44,9 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       count() %>% 
       pull(n) %>% 
       unique()
-  } else if(is.null(by)){
+  } else if(is.null(by)){ # with treatment group
     count <- data %>% 
-      dplyr::select(all_of(item), treat = all_of(treat)) %>% 
+      dplyr::select(all_of(item), treat = treat) %>% 
       pivot_longer(all_of(item), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
@@ -50,9 +57,9 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       count() %>% 
       pull(n) %>% 
       unique()
-  } else {
+  } else { # with treatment and subgroup
     count <- data %>% 
-      dplyr::select(all_of(item), by = all_of(by), treat = all_of(treat)) %>% 
+      dplyr::select(all_of(item), by = by, treat = treat) %>% 
       pivot_longer(all_of(item), 
                    names_to = "question", values_to = "value") %>% 
       filter(value > -1 & !is.na(value)) %>% 
@@ -68,6 +75,7 @@ n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
       unique()
   }
   
+  # print
   if(lang == "DE"){
     if(length(count) == 1 & length(item) == 1){paste("Grafik basiert auf N = ", count, sep = "")} 
     else if(length(count) == 1 & is.null(by) & is.null(treat)){paste("Grafik basiert auf N = ", count, " (pro Unterfrage).", sep = "")}

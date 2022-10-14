@@ -22,15 +22,13 @@
 plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
 
   data %>%
-    mutate(item = {{item}},
-           by = {{by}}) %>%
-    filter(item > -8,
-           by > -8) %>%
-    group_by(item, by) %>%
+    filter({{item}} > -8,
+           {{by}} > -8) %>%
+    group_by({{item}}, {{by}}) %>%
     count() %>%
-    group_by(item) %>%
+    group_by({{item}}) %>%
     mutate(freq = n/sum(n)) %>%
-    ggplot(aes(x = fct_rev(as.factor(item)), y = .data$freq, fill = as.factor(by), label = helper_percentage(.data$freq, 1))) +
+    ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq, fill = as.factor({{by}}), label = helper_percentage(.data$freq, 1))) +
     geom_col(position = position_dodge2(padding = barpadding)) +
     geom_bar_text(family = "Roboto",
                   size = textsize,
@@ -45,7 +43,7 @@ plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legen
     labs(title = "",
          subtitle = "",
          fill = legendtitle,
-         caption = n_par(data, item = item, lang = lang)) +
+         caption = n_par(data, item = {{item}}, lang = lang)) +
     guides(fill = guide_legend(reverse=TRUE)) +
     theme_sep() +
     theme(panel.grid.major.y = element_blank(),

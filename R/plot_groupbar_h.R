@@ -42,8 +42,8 @@ plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legen
     coord_flip() +
     labs(title = "",
          subtitle = "",
-         fill = legendtitle) +#,
-      #   caption = n_par(data, item = {{item}}, lang = lang)) +
+         fill = legendtitle,
+         caption = n_par(data, item = {{item}}, lang = lang)) +
     guides(fill = guide_legend(reverse=TRUE)) +
     theme_sep() +
     theme(panel.grid.major.y = element_blank(),

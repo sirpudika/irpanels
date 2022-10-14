@@ -33,8 +33,8 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   # compute numbers
   if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
     plot <- data %>% 
-      dplyr:: select(all_of(item)) %>% 
-      pivot_longer(everything(), names_to = "variable", values_to = "value") %>%
+      dplyr::select(all_of(item)) %>% 
+      tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
       filter(value > -1) %>% 
       group_by(variable, value) %>% 
       count() %>% 

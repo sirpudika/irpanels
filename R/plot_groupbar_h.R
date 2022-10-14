@@ -21,12 +21,14 @@
 #'
 plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
 
+  data[, "item"] <- data[, as.character(item)]
+  
   data %>%
-    filter({{item}} > -8,
+    filter(item > -8,
            {{by}} > -8) %>%
     group_by({{item}}, {{by}}) %>%
     count() %>%
-    group_by({{item}}) %>%
+    group_by(item) %>%
     mutate(freq = n/sum(n)) %>%
     ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq, fill = as.factor({{by}}), label = helper_percentage(.data$freq, 1))) +
     geom_col(position = position_dodge2(padding = barpadding)) +

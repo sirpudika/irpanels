@@ -53,9 +53,9 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
-  } else if(is.null({{treat}}) & !is.null({{by}})) { #item with subgroups
+  } else if(is.null({{treat}}) & !is.null(by)) { #item with subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), by = {{by}}) %>% 
+      dplyr::select(all_of(item), by = by) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(by, variable, value) %>% 

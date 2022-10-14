@@ -4,22 +4,20 @@
 \alias{n_par}
 \title{Number of participants for survey item}
 \usage{
-n_par(data, item, by = NULL, treat = NULL, lang = "DE")
+n_par(data, item, lang = "DE")
 }
 \arguments{
 \item{data}{a \code{data.frame} object}
 
 \item{item}{relevant survey item (i.e. w5_q17)}
 
-\item{by}{optional argument for distinction by subgroup}
-
-\item{treat}{optional argument for distinction by treatment group}
-
 \item{lang}{language (German = "DE" (default), English = "EN", anything else goes neutral)}
 }
 \value{
-number of participants ("Don't knows"-answers included) for item
+Number of participants ("Don't knows"-answers included) for item
 }
 \description{
 Number of participants for survey item
+To be used with @backref plot_bar_h, @backref plot_bar_v, @backref plot_groupbar_h and @backref plot_groupbar_v.
+For @backref plot_multiple_h and @backref plot_rank_v, use the function @backref n_par_by.
 }

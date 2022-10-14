@@ -5,7 +5,7 @@
 \alias{sep_palettes}
 \title{All colors}
 \format{
-An object of class \code{list} of length 6.
+An object of class \code{list} of length 7.
 }
 \usage{
 sep_palettes

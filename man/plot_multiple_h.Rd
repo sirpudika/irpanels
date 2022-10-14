@@ -15,7 +15,8 @@ plot_multiple_h(
   textsize = 8,
   min_textsize = 5,
   percent_position = "center",
-  legend.pos = "bottom"
+  legend.pos = "bottom",
+  ...
 )
 }
 \arguments{

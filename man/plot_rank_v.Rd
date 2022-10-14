@@ -16,7 +16,8 @@ plot_rank_v(
   min_textsize = 5,
   percent_position = "center",
   barwidth = 0.6,
-  legend.pos = "right"
+  legend.pos = "right",
+  ...
 )
 }
 \arguments{

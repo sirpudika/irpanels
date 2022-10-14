@@ -34,7 +34,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
   if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
     plot <- data %>% 
       dplyr::select(all_of(item)) %>% 
-      tidyr::pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
+      pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
       filter(value > -1) %>% 
       group_by(variable, value) %>% 
       count() %>% 
@@ -104,7 +104,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
     scale_fill_manual(...) +
     scale_x_continuous(labels = scales::percent) +
     labs(x = NULL, y = NULL, caption = caption) +
-    irpanels::theme_sep() +
+    theme_sep() +
     theme(plot.caption = element_text(color = "grey"),
           plot.caption.position =  "plot",
           plot.title = element_text(hjust = 0.5),

@@ -7,7 +7,8 @@ Darkblues = c("#385C9B", "#748DB9", "#A0B1D0", "#CDD6E6", "#E6EbF3"),
 Greens = c("#67804E", "#8DA07A", "#B3C0A7", "#D9DfD3" ,"#ECEFE9"),
 Lightblues = c("#4187C0", "#71A5D0", "#A0C3DF", "#D0E1EF" ,"#E7F0F7"),
 Lightgreens = c("#8E9449", "#AAAF77", "#C7C9A4", "#E3E4D2" ,"#F1F1E8"),
-Pinks = c("#A73788", "#BD69A5", "#D39BC3", "#E9CDE1" ,"#F4E6F0")
+Pinks = c("#A73788", "#BD69A5", "#D39BC3", "#E9CDE1" ,"#F4E6F0"),
+BluePink = c("#BD69A5", "#D39BC3", "lightgrey", "#748DB9", "#385C9B")
 )
 #' ETH color palettes
 #'

@@ -22,6 +22,8 @@ Number of participants ("Don't knows"-answers included) for item
 }
 \description{
 Number of participants for survey item, distinguishable by subgroup and/or treatment group.
+
 To be used with \code{plot_multiple_h()} and  \code{plot_rank_v()}.
+
 For \code{plot_bar_h()}, \code{plot_bar_v()}, \code{plot_groupbar_h()} and \code{plot_groupbar_v()}, use the function \code{n_par()}.
 }

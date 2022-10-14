@@ -2,7 +2,9 @@
 #' 
 #' @description 
 #' Number of participants for survey item
+#' 
 #' To be used with `plot_bar_h()`, `plot_bar_v()`, `plot_groupbar_h()` and `plot_groupbar_v()`.
+#' 
 #' For `plot_multiple_h()` and  `plot_rank_v()`, use the function `n_par_by()`.
 #'
 #' @param data a \code{data.frame} object

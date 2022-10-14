@@ -2,7 +2,9 @@
 #' 
 #' @description 
 #' Number of participants for survey item, distinguishable by subgroup and/or treatment group.
+#' 
 #' To be used with `plot_multiple_h()` and  `plot_rank_v()`.
+#' 
 #' For `plot_bar_h()`, `plot_bar_v()`, `plot_groupbar_h()` and `plot_groupbar_v()`, use the function `n_par()`.
 #'
 #'

@@ -21,8 +21,8 @@
 #'
 plot_groupbar_h <- function(data, item, by, lang = "DE", barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
 
-  data[, "item"] <- data[, as.character({{item}})]
-  data[, "by"] <- data[, as.character({{by}})]
+  data[, "item"] <- data[, {{item}}]
+  data[, "by"] <- data[, {{by}}]
   
   data %>%
     filter(item > -8,

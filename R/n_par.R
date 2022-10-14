@@ -13,12 +13,23 @@
 #' @export
 #'
 
-n_par <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
-  
-  # rename treatment and subgroup variables
- # data$by <- data[, quote(by)]
-  #data$treat <- data[, quote(treat)]
-  if(length(as.character(item)) == 1){data[, "item"] <- data[, as.character(item)]}
+n_par <- function(data, item, lang = "DE"){
+
+  n <- data %>%
+    select({{item}}) %>%
+    filter({{item}} >= -9) %>%
+    count() %>%
+    pull()
+
+  n_text <- case_when(lang == "DE" ~ "Grafik basiert auf N = ",
+                      lang == "EN" ~ "Plot is based on N = ",
+                      TRUE ~ "N = ")
+
+  participants <- paste0("\n", n_text, n)
+}
+
+
+n_par_by <- function(data, item, by = NULL, treat = NULL, lang = "DE"){
   
   # count
   if(is.null(by) & is.null(treat)){ # without treatment or subgroup

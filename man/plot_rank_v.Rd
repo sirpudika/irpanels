@@ -7,8 +7,8 @@
 plot_rank_v(
   data,
   item,
-  by = NULL,
-  treat = NULL,
+  by,
+  treat,
   lang = "DE",
   n.items = length(item_labels),
   ncol.wrap = 1,
@@ -44,6 +44,8 @@ plot_rank_v(
 \item{barwidth}{optional argument to define the width of the bar}
 
 \item{legend.pos}{optional argument to set position of legend}
+
+\item{...}{further arguments of \code{scale_fill_manual} like \code{labels}}
 }
 \value{
 a horizontal barplot for multiple items

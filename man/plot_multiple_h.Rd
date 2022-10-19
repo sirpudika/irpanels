@@ -7,8 +7,8 @@
 plot_multiple_h(
   data,
   item,
-  by = NULL,
-  treat = NULL,
+  by,
+  treat,
   lang = "DE",
   barwidth = 0.6,
   ncol.wrap = 1,
@@ -22,7 +22,7 @@ plot_multiple_h(
 \arguments{
 \item{data}{a \code{data.frame} object}
 
-\item{item}{a vector listing the survey items}
+\item{item}{a \code{vector} listing the survey items}
 
 \item{by}{optional argument for distinction by subgroup}
 
@@ -41,6 +41,8 @@ plot_multiple_h(
 \item{percent_position}{optional argument to set position of percentage within bar ("center", "left", "top", etc.)}
 
 \item{legend.pos}{optional argument to set position of legend}
+
+\item{...}{further arguments of \code{scale_fill_manual} like \code{labels}}
 }
 \value{
 a vertical barplot for ranking

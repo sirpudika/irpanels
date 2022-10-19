@@ -4,12 +4,16 @@
 \alias{n_par}
 \title{Number of participants for survey item}
 \usage{
-n_par(data, item, lang = "DE")
+n_par(data, item, by, treat, lang = "DE")
 }
 \arguments{
 \item{data}{a \code{data.frame} object}
 
 \item{item}{relevant survey item (i.e. w5_q17)}
+
+\item{by}{optional argument for distinction by subgroup}
+
+\item{treat}{optional argument for distinction by treatment group}
 
 \item{lang}{language (German = "DE" (default), English = "EN", anything else goes neutral)}
 }
@@ -17,9 +21,5 @@ n_par(data, item, lang = "DE")
 Number of participants ("Don't knows"-answers included) for item
 }
 \description{
-Number of participants for survey item
-
-To be used with \code{plot_bar_h()}, \code{plot_bar_v()}, \code{plot_groupbar_h()} and \code{plot_groupbar_v()}.
-
-For \code{plot_multiple_h()} and  \code{plot_rank_v()}, use the function \code{n_par_by()}.
+Number of participants for survey item, distinguishable by subgroup and/or treatment group.
 }

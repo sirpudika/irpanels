@@ -32,7 +32,7 @@ plot_bar_v <- function(data, item, lang = "DE", barcolor = "#1F407A", barwidth =
                   outside = TRUE) +
     labs(title = "",
          subtitle = "",
-         caption = n_par(data, {{item}}, lang = lang)) +
+         caption = n_par(data = data, item = ensym(item), lang = lang)) +
     theme_sep() +
     theme(axis.text.y = element_blank(),
           panel.grid.major.x = element_blank(),

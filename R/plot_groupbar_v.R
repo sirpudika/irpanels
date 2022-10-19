@@ -40,7 +40,7 @@ plot_groupbar_v <- function(data, item, by, lang = "DE", barpadding = 0.1, barwi
     labs(title = "",
          subtitle = "",
          fill = legendtitle,
-         caption = n_par(data, {{item}}, lang = lang)) +
+         caption = n_par(data = data, item = ensym(item), by = {{by}}, lang = lang)) +
     theme_sep() +
     theme(panel.grid.major.x = element_blank(),
           panel.grid.major.y = element_line(linetype = "dashed"),

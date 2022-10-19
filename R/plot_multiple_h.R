@@ -1,7 +1,7 @@
 #' Horizontal barplot for multiple items
 #'
 #' @param data a \code{data.frame} object
-#' @param item a vector listing the survey items
+#' @param item a \code{vector} listing the survey items
 #' @param by optional argument for distinction by subgroup
 #' @param treat optional argument for distinction by treatment group
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
@@ -11,6 +11,7 @@
 #' @param min_textsize optional argument to set the minimum text size
 #' @param percent_position optional argument to set position of percentage within bar ("center", "left", "top", etc.)
 #' @param legend.pos optional argument to set position of legend
+#' @param ... further arguments of \code{scale_fill_manual} like \code{labels}
 #'
 #' @return a vertical barplot for ranking
 #' @export
@@ -20,7 +21,7 @@
 #' @import tidyr
 #'
 
-plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
+plot_multiple_h <- function(data, item, by, treat, lang = "DE",
                             barwidth = 0.6, ncol.wrap = 1, 
                             textsize = 8, min_textsize = 5, percent_position = "center",
                             legend.pos = "bottom", ...){
@@ -31,7 +32,7 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
             "Question text ('question') must be defined." = ("question" %in% environment))
   
   # compute numbers
-  if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
+  if(missing(treat) & missing(by)) { #item without treatment or subgroups
     plot <- data %>% 
       dplyr::select(all_of(item)) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
@@ -42,7 +43,16 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
-  } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
+    
+    # set caption according to language
+    caption <- ifelse(lang == "DE", 
+                      paste0("Fragetext: «", question, "»\n",
+                             n_par(data = data, item = item)),
+                      paste0("Question text: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   lang = "EN")))
+    
+  } else if(!missing(treat) & missing(by)) { #item with treatment groups
     plot <- data %>% 
       dplyr::select(all_of(item), treat = {{treat}}) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
@@ -53,7 +63,18 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
-  } else if(is.null(treat) & !is.null(by)) { #item with subgroups
+    
+    # set caption according to language
+    caption <- ifelse(lang == "DE", 
+                      paste0("Fragetext: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   treat = {{treat}})),
+                      paste0("Question text: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   treat = {{treat}}, 
+                                   lang = "EN")))
+    
+  } else if(missing(treat) & !missing(by)) { #item with subgroups
     plot <- data %>% 
       dplyr::select(all_of(item), by = {{by}}) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
@@ -64,6 +85,17 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
+    
+    # set caption according to language
+    caption <- ifelse(lang == "DE", 
+                      paste0("Fragetext: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   by = {{by}})),
+                      paste0("Question text: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   by = {{by}}, 
+                                   lang = "EN")))
+    
   } else { #item with both treatment and subgroups
     plot <- data %>% 
       dplyr::select(all_of(item), treat = {{treat}}, by = {{by}}) %>% 
@@ -75,6 +107,17 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
              percentage = paste0(round(freq_rel*100, 1), "%"))
+    
+    # set caption according to language
+    caption <- ifelse(lang == "DE", 
+                      paste0("Fragetext: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   by = {{by}}, treat = {{treat}})),
+                      paste0("Question text: «", question, "»\n",
+                             n_par(data = data, item = item, 
+                                   by = {{by}}, treat = {{treat}}, 
+                                   lang = "EN")))
+    
   }
   
   # give proper labels (item text)
@@ -82,13 +125,6 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
     plot$variable <- ifelse(plot$variable == item[i], item_labels[i], plot$variable)
   }
   
-  # set caption according to language
-  caption <- ifelse(lang == "DE", 
-                    paste0("Fragetext: «", question, "»\n",
-                          n_par_by(data = data, item = item, by = by, treat = treat)),
-                    paste0("Question text: «", question, "»\n",
-                          n_par_by(data = data, item = item, by = by, treat = treat, 
-                                   lang = "EN")))
   
   # plot
   p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(item_labels)),
@@ -114,11 +150,11 @@ plot_multiple_h <- function(data, item, by = NULL, treat = NULL, lang = "DE",
                                label = T, reverse = T, title = NULL))
   
   # print plot
-  if(is.null(treat) & is.null(by)) { #item without treatment or subgroups
+  if(missing(treat) & missing(by)) { #item without treatment or subgroups
     p
-  } else if(!is.null(treat) & is.null(by)) { #item with treatment groups
+  } else if(!missing(treat) & missing(by)) { #item with treatment groups
     p + facet_wrap(~ treat, ncol = ncol.wrap)
-  } else if(is.null(treat) & !is.null(by)) { #item with subgroups
+  } else if(missing(treat) & !missing(by)) { #item with subgroups
     p + facet_wrap(~ by, ncol = ncol.wrap)
   } else { #item with both treatment and subgroups
     p + facet_grid(treat ~ by)

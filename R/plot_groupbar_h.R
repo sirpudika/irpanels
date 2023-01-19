@@ -38,8 +38,7 @@ plot_groupbar_h <- function(data, item, by, lang = "DE",
                   fullheight = TRUE,
                   color = "white",
                   contrast = TRUE) +
-    scale_y_continuous(labels = scales::label_percent(accuracy = 1),
-                       expand = expansion(add = 0.8)) +
+    scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
     scale_fill_manual(...) +
     coord_flip() +
     labs(title = "",

@@ -36,7 +36,6 @@ plot_bar_h <- function(data, item, lang = "DE", barcolor = "#1F407A", barwidth =
          subtitle = "",
          caption = n_par(data = data, item = ensym(item), lang = lang)) +
     coord_flip(clip = "off") +
-    scale_y_continuous(expand = expansion(add = 0.8)) +
     theme_sep() +
     theme(axis.text.x = element_blank(),
           panel.grid.major.y = element_blank(),

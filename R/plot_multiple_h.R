@@ -127,7 +127,7 @@ plot_multiple_h <- function(data, item, by, treat, lang = "DE",
   
   
   # plot
-  p <- ggplot(plot, aes(factor(variable, levels = rev(item_labels)), freq_rel.
+  p <- ggplot(plot, aes(factor(variable, levels = rev(item_labels)), freq_rel,
                         fill = factor(value), label = percentage)) +
     geom_col(width = barwidth) +
     ggfittext::geom_bar_text(outside = FALSE,

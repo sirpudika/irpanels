@@ -127,7 +127,7 @@ plot_multiple_h <- function(data, item, by, treat, lang = "DE",
   
   
   # plot
-  p <- ggplot(plot, aes(freq_rel, factor(variable, levels = rev(item_labels)),
+  p <- ggplot(plot, aes(factor(variable, levels = rev(item_labels)), freq_rel.
                         fill = factor(value), label = percentage)) +
     geom_col(width = barwidth) +
     ggfittext::geom_bar_text(outside = FALSE,
@@ -135,8 +135,9 @@ plot_multiple_h <- function(data, item, by, treat, lang = "DE",
                              place = percent_position,
                              size = textsize, 
                              min.size = min_textsize) +
+    coord_flip() +
     scale_fill_manual(...) +
-    scale_x_continuous(labels = scales::percent) +
+    scale_y_continuous(labels = scales::percent) +
     labs(x = NULL, y = NULL, caption = caption) +
     theme_sep() +
     theme(plot.caption = element_text(color = "grey"),

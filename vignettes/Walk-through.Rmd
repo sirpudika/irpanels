@@ -102,6 +102,14 @@ plot_groupbar_h(w5, item = w5_q11, by = w5_q2,
  scale_x_discrete(labels = rev(c("Item One", "Item Two", "Item Three", "Item Four", "Item Five")))
 ```
 
+The barposition of both groupbar functions can be changed from its default "dodge" to e.g. "stack":
+
+```{r}
+plot_groupbar_v(w5, item = w5_q11, by = w5_q2, lang = "EN", barposition = "stack",
+                labels = c("Female", "Male"), values = sep_palette("Standard")) +
+ scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
+```
+
 ### *plot_multiple_h*
 
 The plot function `plot_multiple_h` depicts several items from the same question in one plot. Unlike the previous plots, `plot_multiple_h` and `plot_rank_v` demand that you **define the item labels (`item_labels`) and the question text (`question`) beforehand.** The argument `item` takes as input a vector of variables.

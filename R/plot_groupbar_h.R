@@ -5,6 +5,7 @@
 #' @param by grouping variable
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param barpadding optional argument to adjust padding between bars
+#' @param barposition optional argument to determine the positioning of the bars (default: "dodge")
 #' @param legendtitle optional argument to define a legend title
 #' @param textsize optional argument to adjust the text's size
 #' @param min_textsize optional argument to set the minimum text size
@@ -20,7 +21,23 @@
 #'
 
 plot_groupbar_h <- function(data, item, by, lang = "DE", 
-                            barpadding = 0.1, legendtitle = "", textsize = 8, min_textsize = 5, ...){
+                            barpadding = 0.1, barposition = "dodge", legendtitle = "", textsize = 8, min_textsize = 5, ...){
+  
+  if(missing(barposition) | barposition == "dodge"){
+    barposition <- position_dodge2(padding = barpadding)
+    out <- TRUE
+    percent_position <- "right"
+    barwidth <- NULL
+  } else if(barposition == "stack"){
+    out <- FALSE
+    percent_position <- "center"
+    barwidth <- 0.5
+  } else {
+    out <- TRUE
+    percent_position <- "right"
+    barwidth <- NULL
+  }
+  
   data %>%
     filter({{item}} > -8,
            {{by}} > -8) %>%
@@ -30,11 +47,13 @@ plot_groupbar_h <- function(data, item, by, lang = "DE",
     mutate(freq = n/sum(n)) %>%
     ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$freq, 
                fill = as.factor({{by}}), label = irpanels::helper_percentage(.data$freq, 1))) +
-    geom_col(position = position_dodge2(padding = barpadding)) +
+    geom_col(position = barposition, width = barwidth) +
     geom_bar_text(family = "Roboto",
                   size = textsize,
                   min.size = min_textsize,
-                  position = "dodge",
+                  position = barposition,
+                  outside = out,
+                  place = percent_position,
                   fullheight = TRUE,
                   color = "white",
                   contrast = TRUE) +

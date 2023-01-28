@@ -8,8 +8,9 @@ plot_groupbar_v(
   data,
   item,
   by,
+  lang = "DE",
   barpadding = 0.1,
-  barwidth = 0.5,
+  barposition = "dodge",
   legendtitle = "",
   textsize = 8,
   min_textsize = 5,
@@ -23,9 +24,11 @@ plot_groupbar_v(
 
 \item{by}{grouping variable}
 
+\item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
+
 \item{barpadding}{optional argument to adjust padding between bars}
 
-\item{barwidth}{optional argument to define the bar's width}
+\item{barposition}{optional argument to determine the positioning of the bars (default: "dodge")}
 
 \item{legendtitle}{optional argument to define a legend title}
 

@@ -7,6 +7,7 @@
 plot_bar_v(
   data,
   item,
+  lang = "DE",
   barcolor = "#1F407A",
   barwidth = 0.8,
   textvjust = 2,
@@ -18,6 +19,8 @@ plot_bar_v(
 \item{data}{a \code{data.frame} object}
 
 \item{item}{a survey item}
+
+\item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 
 \item{barcolor}{optional argument to set the color of the bar}
 

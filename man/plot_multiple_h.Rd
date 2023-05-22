@@ -9,6 +9,7 @@ plot_multiple_h(
   item,
   by,
   treat,
+  weights,
   lang = "DE",
   barwidth = 0.6,
   ncol.wrap = 1,
@@ -27,6 +28,8 @@ plot_multiple_h(
 \item{by}{optional argument for distinction by subgroup}
 
 \item{treat}{optional argument for distinction by treatment group}
+
+\item{weights}{optional argument to weight output by survey weights}
 
 \item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 

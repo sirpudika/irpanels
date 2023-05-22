@@ -7,6 +7,8 @@
 plot_bar_h(
   data,
   item,
+  weights,
+  lang = "DE",
   barcolor = "#1F407A",
   barwidth = 0.8,
   texthjust = 2,
@@ -18,6 +20,10 @@ plot_bar_h(
 \item{data}{a \code{data.frame} object}
 
 \item{item}{a survey item}
+
+\item{weights}{optional argument to weight output by survey weights}
+
+\item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 
 \item{barcolor}{optional argument to set the color of the bar}
 

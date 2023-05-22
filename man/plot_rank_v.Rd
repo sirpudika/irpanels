@@ -9,6 +9,7 @@ plot_rank_v(
   item,
   by,
   treat,
+  weights,
   lang = "DE",
   n.items = length(item_labels),
   ncol.wrap = 1,
@@ -28,6 +29,8 @@ plot_rank_v(
 \item{by}{optional argument for distinction by subgroup}
 
 \item{treat}{optional argument for distinction by treatment group}
+
+\item{weights}{optional argument to weight output by survey weights}
 
 \item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 

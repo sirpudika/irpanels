@@ -4,6 +4,7 @@
 #' @param item a vector lisiting the survey items
 #' @param by optional argument for distinction by subgroup
 #' @param treat optional argument for distinction by treatment group
+#' @param weights optional argument to weight output by survey weights
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param n.items optional argument to set the number of items per rank (default: all items; if fewer: items with highest values)
 #' @param ncol.wrap optional argument to set the number of facet_wrap columns when distinguishing by subgroup or treatment group
@@ -22,8 +23,8 @@
 #' @import tidyr
 #'
 
-plot_rank_v <- function(data, item, by, treat, lang = "DE",
-                        n.items = length(item_labels), ncol.wrap = 1,
+plot_rank_v <- function(data, item, by, treat, weights,
+                        lang = "DE", n.items = length(item_labels), ncol.wrap = 1,
                         textsize = 8, min_textsize = 5, percent_position = "center",
                         barwidth = 0.6, legend.pos = "right", ...){
   
@@ -32,14 +33,22 @@ plot_rank_v <- function(data, item, by, treat, lang = "DE",
   stopifnot("Labels ('item_labels') must be defined." = ("item_labels" %in% environment),
             "Question text ('question') must be defined." = ("question" %in% environment))
   
+  # create weights column (if set to 1, no weighting occurs)
+  if(missing(weights)){
+    data$weight <- 1
+  } else {
+    data <- data %>% 
+      mutate(weight = {{weights}})
+  }
+  
   # compute numbers
   if(missing(treat) & missing(by)) { #item without treatment or subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item)) %>% 
+      dplyr::select(all_of(item), weight) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>%
       filter(value > 0) %>% 
       group_by(variable, value) %>% 
-      count() %>% 
+      count(wt = weight) %>% 
       group_by(variable) %>% 
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
@@ -51,18 +60,18 @@ plot_rank_v <- function(data, item, by, treat, lang = "DE",
     # set caption according to language
     caption <- ifelse(lang == "DE", 
                       paste0("Fragetext: «", question, "»\n",
-                             n_par(data = data, item = item)),
+                             irpanels::n_par(data = data, item = item)),
                       paste0("Question text: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    lang = "EN")))
     
   } else if(!missing(treat) & missing(by)) { #item with treatment groups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = {{treat}}) %>% 
+      dplyr::select(all_of(item), treat = {{treat}}, weight) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0) %>% 
       group_by(treat, variable, value) %>% 
-      count() %>% 
+      count(wt = weight) %>% 
       group_by(treat, variable) %>%
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
@@ -74,20 +83,20 @@ plot_rank_v <- function(data, item, by, treat, lang = "DE",
     # set caption according to language
     caption <- ifelse(lang == "DE", 
                       paste0("Fragetext: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    treat = {{treat}})),
                       paste0("Question text: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    treat = {{treat}},
                                    lang = "EN")))
     
   } else if(missing(treat) & !missing(by)) { #item with subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), by = {{by}}) %>% 
+      dplyr::select(all_of(item), by = {{by}}, weight) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(by, variable, value) %>% 
-      count() %>% 
+      count(wt = weight) %>% 
       group_by(by, variable) %>%
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
@@ -99,20 +108,20 @@ plot_rank_v <- function(data, item, by, treat, lang = "DE",
     # set caption according to language
     caption <- ifelse(lang == "DE", 
                       paste0("Fragetext: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    by = {{by}})),
                       paste0("Question text: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    by = {{by}},
                                    lang = "EN")))
     
   } else { #item with both treatment and subgroups
     plot <- data %>% 
-      dplyr::select(all_of(item), treat = {{treat}}, by = {{by}}) %>% 
+      dplyr::select(all_of(item), treat = {{treat}}, by = {{by}}, weight) %>% 
       pivot_longer(all_of(item), names_to = "variable", values_to = "value") %>% 
       filter(value > 0 & !is.na(by)) %>% 
       group_by(treat, by, variable, value) %>% 
-      count() %>% 
+      count(wt = weight) %>% 
       group_by(treat, by, variable) %>%
       mutate(total_item = sum(n),
              freq_rel = n/total_item,
@@ -124,10 +133,10 @@ plot_rank_v <- function(data, item, by, treat, lang = "DE",
     # set caption according to language
     caption <- ifelse(lang == "DE", 
                       paste0("Fragetext: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    by = {{by}}, treat = {{treat}})),
                       paste0("Question text: «", question, "»\n",
-                             n_par(data = data, item = item, 
+                             irpanels::n_par(data = data, item = item, 
                                    by = {{by}}, treat = {{treat}},
                                    lang = "EN")))
     
@@ -160,7 +169,7 @@ plot_rank_v <- function(data, item, by, treat, lang = "DE",
                              size = textsize, 
                              min.size = min_textsize) +
     labs(x = NULL, y = NULL, caption = caption) +
-    theme_sep() +
+    irpanels::theme_sep() +
     scale_fill_manual(...) +
     scale_y_continuous(labels = scales::percent) +
     theme(plot.caption = element_text(color = "grey"),

@@ -3,6 +3,7 @@
 #' @param data a \code{data.frame} object
 #' @param item a survey item
 #' @param by grouping variable
+#' @param weights optional argument to weight output by survey weights
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param barpadding optional argument to adjust padding between bars
 #' @param barposition optional argument to determine the positioning of the bars (default: "dodge")
@@ -17,9 +18,11 @@
 #' @import dplyr
 #' @import ggplot2
 #' @import ggfittext
+#' @import pollster
 #'
-plot_groupbar_v <- function(data, item, by, lang = "DE", 
-                            barpadding = 0.1, barposition = "dodge", legendtitle = "", textsize = 8, min_textsize = 5, ...){
+plot_groupbar_v <- function(data, item, by, weights,
+                            lang = "DE", barpadding = 0.1, barposition = "dodge", 
+                            legendtitle = "", textsize = 8, min_textsize = 5, ...){
   
   if(missing(barposition) | barposition == "dodge"){
     barposition <- position_dodge2(padding = barpadding)
@@ -36,14 +39,20 @@ plot_groupbar_v <- function(data, item, by, lang = "DE",
     barwidth <- NULL
   }
   
+  if(missing(weights)){
+    data$weight <- 1
+  } else {
+    data <- data %>% 
+      mutate(weight = {{weights}})
+  }
+  
   data %>%
-    filter({{item}} > -8,
-           {{by}} > -8) %>%
-    group_by({{item}}, {{by}}) %>%
-    count() %>%
-    group_by({{item}}) %>%
-    mutate(freq = n/sum(n)) %>%
-    ggplot(aes(x = as.factor({{item}}), y = .data$freq, fill = as.factor({{by}}), label = helper_percentage(.data$freq, 1))) +
+    filter({{item}} > -1,
+           {{by}} > -1) %>% 
+    crosstab(x = {{item}}, y = {{by}}, weight = weight, format = "long") %>%
+    ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$pct, 
+               fill = as.factor({{by}}), 
+               label = paste0(round(.data$pct, 1), "%"))) +
     geom_col(position = barposition, width = barwidth) +
     geom_bar_text(size = textsize,
                   min.size = min_textsize,
@@ -56,9 +65,7 @@ plot_groupbar_v <- function(data, item, by, lang = "DE",
                   contrast = TRUE) +
     scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
     scale_fill_manual(...) +
-    labs(title = "",
-         subtitle = "",
-         fill = legendtitle,
+    labs(fill = legendtitle,
          caption = n_par(data = data, item = ensym(item), by = {{by}}, lang = lang)) +
     theme_sep() +
     theme(panel.grid.major.x = element_blank(),

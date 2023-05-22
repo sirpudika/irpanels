@@ -32,7 +32,8 @@ Imports:
     rlang,
     scales,
     forcats,
-    kableExtra
+    kableExtra,
+    pollster
 Suggests: 
     knitr,
     rmarkdown

@@ -28,7 +28,6 @@ devtools::install_github("sirpudika/irpanels")
 ```{r setup}
 library(irpanels)
 library(tidyverse)
-library(pollster) #for the weights
 ```
 
 Currently, `irpanels` offers the following functions:

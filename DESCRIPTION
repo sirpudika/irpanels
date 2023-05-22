@@ -33,6 +33,7 @@ Imports:
     scales,
     forcats,
     kableExtra,
+    tidyverse
     pollster
 Suggests: 
     knitr,

@@ -158,10 +158,18 @@ plot_rank_v <- function(data, item, by, treat, weights,
     plot$value <- ifelse(plot$value == i, item_labels[i], plot$value)
   }
   
+  # The color stacking should be in the order of how often smt is considered rank 1
+  # (or, if it never appears in rank 1, then how often rank 2 or 3)
+  fill_order <- plot %>% 
+    arrange(variable, rank, .keep_all = TRUE) %>% 
+    pull(value) %>% 
+    unique() %>% 
+    rev()
   
   # plot
   p <- ggplot(plot, aes(factor(variable, levels = unique(variable)), freq_rel,
-                        fill = factor(value), label = percentage)) +
+                        fill = factor(value, levels = fill_order), 
+                        label = percentage)) +
     geom_col(width = barwidth) +
     ggfittext::geom_bar_text(outside = FALSE,
                              position = position_stack(vjust = 0.5),

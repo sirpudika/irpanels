@@ -5,6 +5,8 @@
 #' @param by optional argument for distinction by subgroup
 #' @param treat optional argument for distinction by treatment group
 #' @param weights optional argument to weight output by survey weights
+#' @param item_labels a \code{vector} listing the item labels for the y-axis
+#' @param question question text
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param n.items optional argument to set the number of items per rank (default: all items; if fewer: items with highest values)
 #' @param ncol.wrap optional argument to set the number of facet_wrap columns when distinguishing by subgroup or treatment group
@@ -24,14 +26,34 @@
 #'
 
 plot_rank_v <- function(data, item, by, treat, weights,
+                        item_labels, question,
                         lang = "DE", n.items = length(item_labels), ncol.wrap = 1,
                         textsize = 8, min_textsize = 5, percent_position = "center",
                         barwidth = 0.6, legend.pos = "right", ...){
   
-  # error message if question or labels are not predefined
+  # Are item labels and question provided?
   environment <- ls(.GlobalEnv)
-  stopifnot("Labels ('item_labels') must be defined." = ("item_labels" %in% environment),
-            "Question text ('question') must be defined." = ("question" %in% environment))
+  if(missing(item_labels) & "item_labels" %in% environment){
+    item_labels <- get("item_labels", envir = .GlobalEnv)
+  } else if (missing(item_labels)) {
+    stop("Labels ('item_labels') must be defined.")
+  }
+  
+  if(missing(question) & "question" %in% environment){
+    question <- get("question", envir = .GlobalEnv)
+    question_text <- ifelse(lang == "DE",
+                            paste0("Fragetext: «", question, "»\n"),
+                            paste0("Question text: «", question, "»\n"))
+    
+  } else if (missing(question)) {
+    question <- NA
+    question_text <- ""
+    
+  } else {
+    question_text <- ifelse(lang == "DE",
+                            paste0("Fragetext: «", question, "»\n"),
+                            paste0("Question text: «", question, "»\n"))
+  }
   
   # create weights column (if set to 1, no weighting occurs)
   if(missing(weights)){
@@ -59,11 +81,11 @@ plot_rank_v <- function(data, item, by, treat, weights,
     
     # set caption according to language
     caption <- ifelse(lang == "DE", 
-                      paste0("Fragetext: «", question, "»\n",
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item)),
-                      paste0("Question text: «", question, "»\n",
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   lang = "EN")))
+                                             lang = "EN")))
     
   } else if(!missing(treat) & missing(by)) { #item with treatment groups
     plot <- data %>% 
@@ -82,13 +104,13 @@ plot_rank_v <- function(data, item, by, treat, weights,
     
     # set caption according to language
     caption <- ifelse(lang == "DE", 
-                      paste0("Fragetext: «", question, "»\n",
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   treat = {{treat}})),
-                      paste0("Question text: «", question, "»\n",
+                                             treat = {{treat}})),
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   treat = {{treat}},
-                                   lang = "EN")))
+                                             treat = {{treat}},
+                                             lang = "EN")))
     
   } else if(missing(treat) & !missing(by)) { #item with subgroups
     plot <- data %>% 
@@ -107,13 +129,13 @@ plot_rank_v <- function(data, item, by, treat, weights,
     
     # set caption according to language
     caption <- ifelse(lang == "DE", 
-                      paste0("Fragetext: «", question, "»\n",
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   by = {{by}})),
-                      paste0("Question text: «", question, "»\n",
+                                             by = {{by}})),
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   by = {{by}},
-                                   lang = "EN")))
+                                             by = {{by}},
+                                             lang = "EN")))
     
   } else { #item with both treatment and subgroups
     plot <- data %>% 
@@ -132,13 +154,13 @@ plot_rank_v <- function(data, item, by, treat, weights,
     
     # set caption according to language
     caption <- ifelse(lang == "DE", 
-                      paste0("Fragetext: «", question, "»\n",
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   by = {{by}}, treat = {{treat}})),
-                      paste0("Question text: «", question, "»\n",
+                                             by = {{by}}, treat = {{treat}})),
+                      paste0(question_text,
                              irpanels::n_par(data = data, item = item, 
-                                   by = {{by}}, treat = {{treat}},
-                                   lang = "EN")))
+                                             by = {{by}}, treat = {{treat}},
+                                             lang = "EN")))
     
   }
   

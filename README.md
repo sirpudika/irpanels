@@ -1,7 +1,7 @@
 # Hi there! 🌳
 `irpanels` is a little package to help you wrangle with and visualize the data from the [Swiss Environmental Panel](https://istp.ethz.ch/research/sep.html) and the [Swiss Mobility Panel](https://istp.ethz.ch/research/swiss-mobility-panel.html). This repository is a fork from the [`sep` package](https://github.com/bonschorno/sep) and extends its functionality to data from the Swiss Mobility Panel.
 
-The **latest update** was on *August 28, 2023*. You can download and update the package using `devtools::install_github("sirpudika/irpanels")`.
+The **latest update** was on *August 31, 2023*. You can download and update the package using `devtools::install_github("sirpudika/irpanels")`.
 
 ## How does `irpanels` help me?
 

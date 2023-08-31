@@ -10,6 +10,8 @@ plot_multiple_h(
   by,
   treat,
   weights,
+  item_labels,
+  question,
   lang = "DE",
   barwidth = 0.6,
   ncol.wrap = 1,
@@ -30,6 +32,10 @@ plot_multiple_h(
 \item{treat}{optional argument for distinction by treatment group}
 
 \item{weights}{optional argument to weight output by survey weights}
+
+\item{item_labels}{a \code{vector} listing the item labels for the y-axis}
+
+\item{question}{question text}
 
 \item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 

@@ -35,7 +35,7 @@ plot_multiple_h(
 
 \item{item_labels}{a \code{vector} listing the item labels for the y-axis}
 
-\item{question}{question text}
+\item{question}{optional argument to add question text in caption}
 
 \item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 

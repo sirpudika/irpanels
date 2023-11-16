@@ -8,6 +8,7 @@ plot_bar_v(
   data,
   item,
   weights,
+  question,
   lang = "DE",
   barcolor = "#1F407A",
   barwidth = 0.8,
@@ -22,6 +23,8 @@ plot_bar_v(
 \item{item}{a survey item}
 
 \item{weights}{optional argument to weight output by survey weights}
+
+\item{question}{optional argument to add question text in caption}
 
 \item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 

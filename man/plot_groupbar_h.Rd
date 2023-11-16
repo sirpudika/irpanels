@@ -9,6 +9,7 @@ plot_groupbar_h(
   item,
   by,
   weights,
+  question,
   lang = "DE",
   barpadding = 0.1,
   barposition = "dodge",
@@ -26,6 +27,8 @@ plot_groupbar_h(
 \item{by}{grouping variable}
 
 \item{weights}{optional argument to weight output by survey weights}
+
+\item{question}{optional argument to add question text in caption}
 
 \item{lang}{optional argument for language (German = "DE" (default), English = "EN")}
 

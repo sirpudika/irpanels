@@ -3,6 +3,7 @@
 #' @param data a \code{data.frame} object
 #' @param item a survey item
 #' @param weights optional argument to weight output by survey weights
+#' @param question optional argument to add question text in caption
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param barcolor optional argument to set the color of the bar
 #' @param barwidth optional argument to define the width of the bar
@@ -18,7 +19,7 @@
 #' @import pollster
 #'
 #'
-plot_bar_v <- function(data, item, weights,
+plot_bar_v <- function(data, item, weights, question,
                        lang = "DE", barcolor = "#1F407A", barwidth = 0.8, 
                        textvjust = 2, textsize = 8, min_textsize = 5){
   if(missing(weights)){

@@ -88,6 +88,7 @@ plot_groupbar_v <- function(data, item, by, weights, question,
     theme(panel.grid.major.x = element_blank(),
           panel.grid.major.y = element_line(linetype = "dashed"),
           legend.position = "bottom",
-          plot.caption = element_text(color = "grey"))
+          plot.caption = element_text(color = "grey")) +
+    guides(fill = guide_legend(keywidth = 0.4, keyheight = 0.8))
   
 }

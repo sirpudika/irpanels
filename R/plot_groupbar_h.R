@@ -4,6 +4,7 @@
 #' @param item a survey item
 #' @param by grouping variable
 #' @param weights optional argument to weight output by survey weights
+#' @param question optional argument to add question text in caption
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param barpadding optional argument to adjust padding between bars
 #' @param barposition optional argument to determine the positioning of the bars (default: "dodge")
@@ -19,9 +20,10 @@
 #' @import ggplot2
 #' @import forcats
 #' @import ggfittext
+#' @import pollster
 #'
 
-plot_groupbar_h <- function(data, item, by, weights, 
+plot_groupbar_h <- function(data, item, by, weights, question,
                             lang = "DE", barpadding = 0.1, barposition = "dodge", 
                             legendtitle = "", textsize = 8, min_textsize = 5, ...){
   
@@ -47,6 +49,21 @@ plot_groupbar_h <- function(data, item, by, weights,
       mutate(weight = {{weights}})
   }
   
+  if (missing(question)) {
+    question <- NA
+    question_text <- ""
+    
+  } else {
+    
+    if(grepl("Fragetext: «", question) | grepl("Question text: «", question)){
+      question_text <- paste0(question, "\n")
+    } else {
+      question_text <- ifelse(lang == "DE",
+                              paste0("Fragetext: «", question, "»\n"),
+                              paste0("Question text: «", question, "»\n"))
+    }
+  }
+  
   data %>%
     filter({{item}} > -1,
            {{by}} > -1) %>% 
@@ -65,16 +82,16 @@ plot_groupbar_h <- function(data, item, by, weights,
                   color = "white",
                   contrast = TRUE) +
     scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
-   scale_fill_manual(...) +
+    scale_fill_manual(...) +
     coord_flip() +
     labs(fill = legendtitle,
-         caption = n_par(data, item = ensym(item), by = {{by}}, lang = lang)) +
-    guides(fill = guide_legend(reverse=TRUE)) +
+         caption = paste(question_text,
+                         n_par(data = data, item = ensym(item), lang = lang))) +
     theme_sep() +
     theme(panel.grid.major.y = element_blank(),
           panel.grid.major.x = element_line(linetype = "dashed"),
           legend.position = "bottom",
-          plot.caption = element_text(color = "grey"),
-          axis.text.x = element_blank())
+          plot.caption = element_text(color = "grey")) +
+    guides(fill = guide_legend(reverse=TRUE))
 }
 

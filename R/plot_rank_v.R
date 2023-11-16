@@ -6,7 +6,7 @@
 #' @param treat optional argument for distinction by treatment group
 #' @param weights optional argument to weight output by survey weights
 #' @param item_labels a \code{vector} listing the item labels for the y-axis
-#' @param question question text
+#' @param question optional argument to add question text in caption
 #' @param lang optional argument for language (German = "DE" (default), English = "EN")
 #' @param n.items optional argument to set the number of items per rank (default: all items; if fewer: items with highest values)
 #' @param ncol.wrap optional argument to set the number of facet_wrap columns when distinguishing by subgroup or treatment group
@@ -41,18 +41,28 @@ plot_rank_v <- function(data, item, by, treat, weights,
   
   if(missing(question) & "question" %in% environment){
     question <- get("question", envir = .GlobalEnv)
-    question_text <- ifelse(lang == "DE",
-                            paste0("Fragetext: «", question, "»\n"),
-                            paste0("Question text: «", question, "»\n"))
+    
+    if(grepl("Fragetext: «", question) | grepl("Question text: «", question)){
+      question_text <- paste0(question, "\n")
+    } else {
+      question_text <- ifelse(lang == "DE",
+                              paste0("Fragetext: «", question, "»\n"),
+                              paste0("Question text: «", question, "»\n"))
+    }
     
   } else if (missing(question)) {
     question <- NA
     question_text <- ""
     
   } else {
-    question_text <- ifelse(lang == "DE",
-                            paste0("Fragetext: «", question, "»\n"),
-                            paste0("Question text: «", question, "»\n"))
+    
+    if(grepl("Fragetext: «", question) | grepl("Question text: «", question)){
+      question_text <- paste0(question, "\n")
+    } else {
+      question_text <- ifelse(lang == "DE",
+                              paste0("Fragetext: «", question, "»\n"),
+                              paste0("Question text: «", question, "»\n"))
+    }
   }
   
   # create weights column (if set to 1, no weighting occurs)

@@ -28,6 +28,21 @@ plot_bar_v <- function(data, item, weights,
       mutate(weight = {{weights}})
   }
   
+  if (missing(question)) {
+    question <- NA
+    question_text <- ""
+    
+  } else {
+    
+    if(grepl("Fragetext: «", question) | grepl("Question text: «", question)){
+      question_text <- paste0(question, "\n")
+    } else {
+      question_text <- ifelse(lang == "DE",
+                              paste0("Fragetext: «", question, "»\n"),
+                              paste0("Question text: «", question, "»\n"))
+    }
+  }
+  
   data %>%
     filter({{item}} > -1) %>% 
     topline(variable = {{item}}, weight = weight) %>%
@@ -39,10 +54,11 @@ plot_bar_v <- function(data, item, weights,
                   family = "Roboto",
                   padding.y = grid::unit(textvjust, "mm"),
                   outside = TRUE) +
-    labs(caption = n_par(data = data, item = ensym(item), lang = lang)) +
+    scale_y_continuous(labels = scales::label_percent(accuracy = 1)) +
+    labs(caption = paste(question_text,
+                         n_par(data = data, item = ensym(item), lang = lang))) +
     theme_sep() +
-    theme(axis.text.y = element_blank(),
-          panel.grid.major.x = element_blank(),
+    theme(panel.grid.major.x = element_blank(),
           panel.grid.major.y = element_line(linetype = "dashed"),
           plot.caption = element_text(color = "grey"))
 

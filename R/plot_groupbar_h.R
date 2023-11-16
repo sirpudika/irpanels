@@ -92,6 +92,6 @@ plot_groupbar_h <- function(data, item, by, weights, question,
           panel.grid.major.x = element_line(linetype = "dashed"),
           legend.position = "bottom",
           plot.caption = element_text(color = "grey")) +
-    guides(fill = guide_legend(reverse=TRUE))
+    guides(fill = guide_legend(keywidth = 0.4, keyheight = 0.8, reverse=TRUE))
 }
 

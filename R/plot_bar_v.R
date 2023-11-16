@@ -47,7 +47,7 @@ plot_bar_v <- function(data, item, weights, question,
   data %>%
     filter({{item}} > -1) %>% 
     topline(variable = {{item}}, weight = weight) %>%
-    ggplot(aes(x = .data$Response, y = .data$`Valid Percent`, 
+    ggplot(aes(x = .data$Response, y = .data$`Valid Percent`/100, 
                label = paste0(round(.data$`Valid Percent`, 1), "%"))) +
     geom_col(fill = barcolor, width = barwidth) +
     geom_bar_text(size = textsize,

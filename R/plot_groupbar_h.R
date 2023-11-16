@@ -68,7 +68,7 @@ plot_groupbar_h <- function(data, item, by, weights, question,
     filter({{item}} > -1,
            {{by}} > -1) %>% 
     crosstab(x = {{item}}, y = {{by}}, weight = weight, format = "long") %>%
-    ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$pct, 
+    ggplot(aes(x = fct_rev(as.factor({{item}})), y = .data$pct/100, 
                fill = as.factor({{by}}), 
                label = paste0(round(.data$pct, 1), "%"))) +
     geom_col(position = barposition, width = barwidth) +

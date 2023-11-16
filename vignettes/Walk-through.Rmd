@@ -75,9 +75,11 @@ plot_bar_v(w5, item = w5_q11, textsize = 11)
 
 There is a corresponding argument in the function for the share of "Don't know" responses (`dk_share`). For the labels, you can use the underlying `ggplot2` structure of the functions by simply adding further layers (in this case, `scale_x_discrete` to add labels). **NB: When using the horizontal bar plots (with one or two variables), you have to reverse the order of your manual labels to display them correctly!!** With further optional arguments, the bars' colour or the relative frequencies' position can be changed, among other things.
 
+By specifying the argument `question`, you can add the question in the caption.
+
 ```{r}
-plot_bar_h(w5, item = w5_q11) +
-  scale_x_discrete(labels = rev(c("Item One", "Item Two", "Item Three", "Item Four", "Item Five")))
+plot_bar_h(w5, item = w5_q11, question = "Welches item bevorzugen Sie?") +
+  scale_x_discrete(labels = rev(c("Erstes Item", "Zweites Item", "Drittes Item", "Viertes Item", "Fünftes Item")))
 ```
 
 ### *plot_groupbar_v* / *plot_groupbar_h*
@@ -90,6 +92,7 @@ You can select the palette of your choice by either saving it as an object or di
 
 ```{r}
 plot_groupbar_v(w5, item = w5_q11, by = w5_q2, lang = "EN",
+                question = "Which items do you prefer?",
                 labels = c("Female", "Male"), values = sep_palette("Standard")) +
   scale_x_discrete(labels = c("Item One", "Item Two", "Item Three", "Item Four", "Item Five"))
 ```
